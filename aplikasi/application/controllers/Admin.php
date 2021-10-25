@@ -1,4 +1,7 @@
 <?php
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
@@ -170,6 +173,11 @@ class Admin extends CI_Controller
 
         redirect('admin/siswa');
     }
+    public function uploadSiswa()
+    {
+        //uplad file
+        $config['upload_path'] = './upload/';
+    }
     public function hapusGuru($nuptk)
     {
         $sql = "DELETE g.*, u.* FROM guru g, user u WHERE g.nuptk = $nuptk AND u.username = $nuptk";
@@ -186,17 +194,7 @@ class Admin extends CI_Controller
 
         redirect('admin/siswa');
     }
-    public function uploadSiswa()
-    {
-        if (isset($_FILES["uploadSiswa"]["name"])) {
-            //uplad file
 
-            $file_tmp = $_FILES['uploadSiswa']['tmp_name'];
-            $file_name = $_FILES['uploadSiswa']['name'];
-            $file_size = $_FILES['uploadSiswa']['size'];
-            $file_type = $_FILES['uploadSiswa']['type'];
-        }
-    }
 
     public function atur_jadwal($idKelas)
     {

@@ -140,7 +140,7 @@
 
                     <div class="form-group">
                         <label for="uploadSiswa">upload template yang sudah disediakan</label>
-                        <input type="file" class="form-control-file" id="uploadSiswa" name="uploadSiswa" accept=".xls, .xlsx" required>
+                        <input type="file" class="form-control-file" id="file" name="file" accept=".xls, .xlsx" required>
                     </div>
 
                     <div class="modal-footer">

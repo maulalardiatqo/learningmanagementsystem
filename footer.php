@@ -13,6 +13,10 @@
             <span>maulalardiatqo123@gmail.com </span>
         </div>
         <div class="button">
+            <div class="icon"><i class="fa-brands fa-github"></i></div>
+            <span>maulalardiatqo.github.io </span>
+        </div>
+        <div class="button">
             <div class="icon"><i class="fab fa-whatsapp"></i></div>
             <span>089619166878</span>
         </div>
@@ -20,7 +24,7 @@
     <br>
     <div class="row justify-content-center">
         <div class="col text-center">
-            <p style="color: antiquewhite;"> &copy; Copyright 2021 Develop by :<a class="text-white" href="http://maulalardiatqo.lovestoblog.com" style="text-decoration: none;">Maulal Ardi Atqo </a></p>
+            <p style="color: antiquewhite;"> &copy; Copyright 2021 Develop by :<a class="text-white" href="http://maulalardiatqo.github.io" style="text-decoration: none;">Maulal Ardi Atqo </a></p>
         </div>
     </div>
 </div>
