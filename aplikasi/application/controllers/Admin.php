@@ -199,7 +199,7 @@ class Admin extends CI_Controller
                             'kontak' => $row->getCellAtIndex(6),
                             'kelas' => $row->getCellAtIndex(7),
                             'nama_ibu' => $row->getCellAtIndex(8),
-                            'is_active' => 0,
+                            'is_active' => 1,
                         );
                         $dataUser = array(
                             'nama' => $row->getCellAtIndex(3),
