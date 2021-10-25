@@ -1,8 +1,9 @@
 <?php
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-
 defined('BASEPATH') or exit('No direct script access allowed');
+require_once APPPATH . 'third_party/Spout/AutoLoader/autoload.php';
+
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
 class Admin extends CI_Controller
 {
@@ -10,6 +11,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+        $this->load->model('siswaModel');
     }
     public function index()
     {
@@ -176,7 +178,51 @@ class Admin extends CI_Controller
     public function uploadSiswa()
     {
         //uplad file
-        $config['upload_path'] = './upload/';
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'xlsx|xls';
+        $config['file_name'] = 'doc' . time();
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('file')) {
+            $file = $this->upload->data();
+            $reader = ReaderEntityFactory::createXLSXReader();
+            $reader->open('uploads/' . $file['file_name']);
+            foreach ($reader->getSheetIterator() as $sheet) {
+                $numrow = 1;
+                foreach ($sheet->getRowIterator() as $row) {
+                    if ($numrow > 1) {
+                        $dataSiswa = array(
+                            'nis' => $row->getCellAtIndex(1),
+                            'nik' => $row->getCellAtIndex(2),
+                            'nama_siswa' => $row->getCellAtIndex(3),
+                            'alamat' => $row->getCellAtIndex(4),
+                            'gender' => $row->getCellAtIndex(5),
+                            'kontak' => $row->getCellAtIndex(6),
+                            'kelas' => $row->getCellAtIndex(7),
+                            'nama_ibu' => $row->getCellAtIndex(8),
+                            'is_active' => 0,
+                        );
+                        $dataUser = array(
+                            'nama' => $row->getCellAtIndex(3),
+                            'foto' => 'default.png',
+                            'username' => $row->getCellAtIndex(1),
+                            'password' => $row->getCellAtIndex(1),
+                            'role_id' => 3,
+                            'is_active' => 1,
+                            'date_create' => date('D-M-Y'),
+                        );
+                        $this->siswaModel->import_data($dataSiswa, $dataUser);
+                    }
+                    $numrow++;
+                }
+                $reader->close();
+                unlink('uploads/' . $file['file_name']);
+                $this->session->set_flashdata('flash', 'Data Berhasil di Upload');
+                $this->session->set_flashdata('flashtype', 'success');
+            }
+        } else {
+            echo "Error :" . $this->upload->display_errors();
+        };
+        redirect('admin/siswa');
     }
     public function hapusGuru($nuptk)
     {
