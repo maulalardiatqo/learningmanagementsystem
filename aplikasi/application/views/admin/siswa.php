@@ -97,7 +97,7 @@
                         <label for="gender">Gender</label>
                         <select name="gender" id="gender" class="form-group">
                             <option class="form-group" value="Laki-Laki">Laki-Laki</option>
-                            <option class="form-group" v value="Perempuan">Perempuan</option>
+                            <option class="form-group" value="Perempuan">Perempuan</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -105,8 +105,20 @@
                         <input class="form-control" type="text" id="kontak" name="kontak">
                     </div>
                     <div class="form-group">
+                        <label for="prodi">Prodi</label>
+                        <select name="prodi" id="prodi">
+                            <option value="tkj">TKJ</option>
+                            <option value="tkr">TKR</option>
+                            <option value="apm">APM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="kelas">Kelas</label>
-                        <input class="form-control" type="text" id="kelas" name="kelas">
+                        <select name="kelas" id="kelas">
+                            <option value="XII TKJ A">XII TKJ A</option>
+                            <option value="XII TKJ B">XII TKJ B</option>
+                            <option value="XII TKJ C">XII TKJ C</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="namaibu">Nama Ibu</label>
