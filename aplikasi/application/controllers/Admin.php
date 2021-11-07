@@ -37,6 +37,12 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $Nprodi = 'TKJ';
+        // $data['prodi'] = $this->db->get('prodi')->result_array();
+        $Nprodi = 'TKJ';
+        $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -47,6 +53,10 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $Nprodi = 'TKR-O';
+
+
+        $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -57,17 +67,32 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $Nprodi = 'APM';
+        $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/apm', $data);
         $this->load->view('templates/footer');
     }
+    public function prodi()
+    {
+        $data['judul'] = 'Admin';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['prodi'] = $this->db->get('prodi')->result_array();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/Prodi', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function siswa()
     {
         $data['judul'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $data['siswa'] = $this->db->get('siswa')->result_array();
+        $data['prodi'] = $this->db->get('prodi')->result_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -177,6 +202,7 @@ class Admin extends CI_Controller
     }
     public function uploadSiswa()
     {
+        $this->form_validation->set_rules('nis', 'NIS', 'is_unique[siswa.nis]|required');
         //uplad file
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'xlsx|xls';
@@ -184,11 +210,13 @@ class Admin extends CI_Controller
         $this->load->library('upload', $config);
         if ($this->upload->do_upload('file')) {
             $file = $this->upload->data();
+
             $reader = ReaderEntityFactory::createXLSXReader();
             $reader->open('uploads/' . $file['file_name']);
             foreach ($reader->getSheetIterator() as $sheet) {
                 $numrow = 1;
                 foreach ($sheet->getRowIterator() as $row) {
+                    $passwordU = password_hash($row->getCellAtIndex(1), PASSWORD_DEFAULT);
                     if ($numrow > 1) {
                         $dataSiswa = array(
                             'nis' => $row->getCellAtIndex(1),
@@ -205,12 +233,14 @@ class Admin extends CI_Controller
                             'nama' => $row->getCellAtIndex(3),
                             'foto' => 'default.png',
                             'username' => $row->getCellAtIndex(1),
-                            'password' => $row->getCellAtIndex(1),
+                            'password' => $passwordU,
                             'role_id' => 3,
                             'is_active' => 1,
                             'date_create' => date('D-M-Y'),
                         );
-                        $this->siswaModel->import_data($dataSiswa, $dataUser);
+                        if ($dataSiswa['nis']) {
+                            $this->siswaModel->import_data($dataSiswa, $dataUser);
+                        }
                     }
                     $numrow++;
                 }
@@ -221,6 +251,8 @@ class Admin extends CI_Controller
             }
         } else {
             echo "Error :" . $this->upload->display_errors();
+            $this->session->set_flashdata('flash', 'NIS Sudah terdaftar');
+            $this->session->set_flashdata('flashtype', 'info');
         };
         redirect('admin/siswa');
     }

@@ -78,3 +78,59 @@
             </div>
         </div>
     </div>
+    <div class="ardi">
+        ardi
+    </div>
+    <div id="appCapsule">
+        <!-- Wallet Card -->
+        <div class="section wallet-card-section pt-1">
+            <div class="wallet-card">
+                <!-- Balance -->
+
+                <!-- * Balance -->
+                <!-- Wallet Footer -->
+                <div class="wallet-footer">
+                    <div class="item">
+                        <a href="./absent">
+                            <div class="icon-wrapper bg-danger">
+                                <ion-icon name="camera-outline"></ion-icon>
+                            </div>
+                            <strong>Absen</strong>
+                        </a>
+                    </div>
+
+
+                    <div class="item">
+                        <a href="./cuty">
+                            <div class="icon-wrapper bg-primary">
+                                <ion-icon name="calendar-outline"></ion-icon>
+                            </div>
+                            <strong>Cuti</strong>
+                        </a>
+                    </div>
+
+                    <div class="item">
+                        <a href="./history">
+                            <div class="icon-wrapper bg-success">
+                                <ion-icon name="document-text-outline"></ion-icon>
+                            </div>
+                            <strong>History</strong>
+                        </a>
+                    </div>
+
+                    <div class="item">
+                        <a href="./profile">
+                            <div class="icon-wrapper bg-warning">
+                                <ion-icon name="person-outline"></ion-icon>
+                            </div>
+                            <strong>Profil</strong>
+                        </a>
+                    </div>
+
+
+                </div>
+                <!-- * Wallet Footer -->
+            </div>
+        </div>
+    </div>
+    <!-- Wallet Card -->

@@ -3,7 +3,7 @@
     <div id="flash-data" data-typealert="<?= $this->session->flashData('flashtype'); ?>" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
     <div class="row">
         <div class="col text-center">
-            <h3>Data Siswa MTs Ihsaniyah</h3>
+            <h3>Data Siswa SMK AL AMIRIYAH</h3>
         </div>
     </div>
 </div>
@@ -93,9 +93,11 @@
                         <label for="alamat">Alamat</label>
                         <input class="form-control" type="text" id="alamat" name="alamat">
                     </div>
-                    <div class="form-group">
+                    <div>
                         <label for="gender">Gender</label>
-                        <select name="gender" id="gender" class="form-group">
+                    </div>
+                    <div class="dropdown">
+                        <select name="gender" id="gender" class="btn btn-secondary dropdown-toggle">
                             <option class="form-group" value="Laki-Laki">Laki-Laki</option>
                             <option class="form-group" value="Perempuan">Perempuan</option>
                         </select>
@@ -104,21 +106,29 @@
                         <label for="kontak">Kontak</label>
                         <input class="form-control" type="text" id="kontak" name="kontak">
                     </div>
-                    <div class="form-group">
+                    <div>
                         <label for="prodi">Prodi</label>
-                        <select name="prodi" id="prodi">
-                            <option value="tkj">TKJ</option>
-                            <option value="tkr">TKR</option>
-                            <option value="apm">APM</option>
-                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="kelas">Kelas</label>
-                        <select name="kelas" id="kelas">
-                            <option value="XII TKJ A">XII TKJ A</option>
-                            <option value="XII TKJ B">XII TKJ B</option>
-                            <option value="XII TKJ C">XII TKJ C</option>
+                    <div class="dropdown">
+
+                        <select name="prodi" id="prodi" class="btn btn-secondary dropdown-toggle">
+                            <?php foreach ($prodi as $p) : ?>
+                                <option value="?= $p['nama_prodi']; ?>"><?= $p['nama_prodi']; ?></option>
+                            <?php endforeach ?>
                         </select>
+
+                    </div>
+                    <div>
+                        <label for="prodi">Kelas</label>
+                    </div>
+                    <div class="dropdown">
+
+                        <select name="prodi" id="prodi" class="btn btn-secondary dropdown-toggle">
+                            <?php foreach ($prodi as $p) : ?>
+                                <option value="?= $p['nama_prodi']; ?>"><?= $p['nama_prodi']; ?></option>
+                            <?php endforeach ?>
+                        </select>
+
                     </div>
                     <div class="form-group">
                         <label for="namaibu">Nama Ibu</label>

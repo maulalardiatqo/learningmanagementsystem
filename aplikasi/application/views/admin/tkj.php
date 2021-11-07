@@ -3,7 +3,50 @@
     <div id="flash-data" data-typealert="<?= $this->session->flashData('flashtype'); ?>" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
     <div class="row">
         <div class="col text-center">
-            <h3>PRODI TEKNIK KOMPUTER JARINGAN</h3>
+            <h4>PRODI TEKNIK KOMPUTER JARINGAN</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-5 ml-4">
+        <div class="card">
+            <div class="card-body">
+                <form>
+
+                    <div class="mb-3 ">
+                        <label for="exampleInputEmail1" class="form-label">Ka. Prodi</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="<?= $prodi['kaprodi'] ?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form action="">
+                    <h5><i class="fa-solid fa-circle-info"></i><i class="fas fa-info-circle"></i> Info Prodi</h5>
+                    <div>
+                        <label for="">Jumlah Kelas :</label>
+                    </div>
+                    <div>
+                        <label for="">Jumlah Siswa :</label>
+
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 </div>
