@@ -20,8 +20,6 @@
 
     <!-- Custom styles for this page -->
     <link href="<?= base_url('assets/') ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-    <link href="<?= base_url('assets/') ?>css/style.css" rel="stylesheet">
     <!-- icon -->
     <link rel="shorcut icon" href="<?= base_url('asstes/') ?>img/kemenag.png">
 
