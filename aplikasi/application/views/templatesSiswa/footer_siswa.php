@@ -15,18 +15,18 @@
         <i class="material-icons nav__icon">edit_note</i>
         <span class="nav__text">Tugas</span>
     </a>
-    <a href="<?= base_url('siswa/profil') ?>" class="nav__link">
-        <i class="material-icons nav__icon">person</i>
-        <span class="nav__text">Profil</span>
+    <a href="<?= base_url('siswa/absen') ?>" class="nav__link">
+        <i class="material-icons nav__icon">fingerprint</i>
+        <span class="nav__text">Absen</span>
     </a>
 
 </nav>
-</div>
+
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span style="color:black;"> &copy; Copyright <?= date('Y'); ?> Develop : <a style="text-decoration: none;" href="http://maulalardiatqo.lovestoblog.com">Maulal Ardi Atqo</a></span>
+            <span style="color:black;"> &copy; Copyright <?= date('Y'); ?> Develop : <a style="text-decoration: none;" href="http://maulalardiatqo.github.io">Maulal Ardi Atqo</a></span>
         </div>
     </div>
 </footer>
@@ -39,9 +39,9 @@
 <!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
+<!-- <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
-</a>
+</a> -->
 
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

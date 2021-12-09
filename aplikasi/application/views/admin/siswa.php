@@ -93,7 +93,7 @@
                         <label for="alamat">Alamat</label>
                         <input class="form-control" type="text" id="alamat" name="alamat">
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label for="gender">Gender</label>
                     </div>
                     <div class="dropdown">
@@ -106,26 +106,13 @@
                         <label for="kontak">Kontak</label>
                         <input class="form-control" type="text" id="kontak" name="kontak">
                     </div>
-                    <div>
-                        <label for="prodi">Prodi</label>
-                    </div>
-                    <div class="dropdown">
-
-                        <select name="prodi" id="prodi" class="btn btn-secondary dropdown-toggle">
-                            <?php foreach ($prodi as $p) : ?>
-                                <option value="?= $p['nama_prodi']; ?>"><?= $p['nama_prodi']; ?></option>
-                            <?php endforeach ?>
-                        </select>
-
-                    </div>
-                    <div>
+                    <div class="form-group">
                         <label for="prodi">Kelas</label>
                     </div>
                     <div class="dropdown">
-
-                        <select name="prodi" id="prodi" class="btn btn-secondary dropdown-toggle">
-                            <?php foreach ($prodi as $p) : ?>
-                                <option value="?= $p['nama_prodi']; ?>"><?= $p['nama_prodi']; ?></option>
+                        <select name="kelas" id="kelas" class="btn btn-secondary dropdown-toggle">
+                            <?php foreach ($kelas as $p) : ?>
+                                <option value="<?= $p['tingkat'] . $p['kelas_prodi'] . $p['nama_kelas']; ?>"><?= $p['tingkat'] . ' ' . $p['kelas_prodi'] . ' ' . $p['nama_kelas']; ?></option>
                             <?php endforeach ?>
                         </select>
 

@@ -10,6 +10,9 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata('username')) {
+            redirect('auth');
+        }
         $this->load->library('form_validation');
         $this->load->model('siswaModel');
     }
@@ -92,7 +95,7 @@ class Admin extends CI_Controller
         $data['judul'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $data['siswa'] = $this->db->get('siswa')->result_array();
-        $data['prodi'] = $this->db->get('prodi')->result_array();
+        $data['kelas'] = $this->db->get('kelas')->result_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -122,7 +125,7 @@ class Admin extends CI_Controller
         $data['guru'] = $this->db->get('guru')->result_array();
         $data['kelas'] = $this->db->get('kelas')->result_array();
         $data['mapel'] = $this->db->get('mapel')->result_array();
-
+        $data['jammengajar'] = $this->db->get('jam_mengajar')->result_array();
 
         $this->form_validation->set_rules('hari', 'Hari', 'required');
         if ($this->form_validation->run() == false) {
@@ -137,7 +140,8 @@ class Admin extends CI_Controller
                 'hari' => $this->input->post('hari'),
                 'id_guru' => $this->input->post('guru'),
                 'id_mapel' => $this->input->post('mapel'),
-                'jam' => $this->input->post('jam')
+                'jam_masuk' => $this->input->post('jam_masuk'),
+                'jam_keluar' => $this->input->post('jam_keluar')
             ];
             $this->db->insert('jadwal', $data);
 

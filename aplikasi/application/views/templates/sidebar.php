@@ -33,7 +33,11 @@
             <i class="fas fa-user"></i>
             <span>Siswa</span></a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('admin/jadwal') ?>">
+            <i class="fas fa-user"></i>
+            <span>Jadwal</span></a>
+    </li>
 
 
 

@@ -28,8 +28,46 @@ body{
   transition: background-color 0.1s ease-in-out;
 }
 .nav__link:hover{
-  background-color: rgb(16, 194, 238);
+  background-color: rgb(17, 218, 157);
 }
 .nav__icon{
   font-size: 18px;
+}
+.chat{
+
+  height: 99vh;
+  width: 100%;
+  display: flex;
+  overflow: auto;
+}
+.form-chat{
+  width: 98%;
+  position: fixed;
+  bottom: 50px;
+}
+.outgoing_msg {
+  overflow: hidden;
+  margin: 26px 0 26px;
+}
+.sent_msg {
+  float: right;
+  width: 46%;
+}
+.time_date {
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+.received_withd_msg {
+  width: 57%;
+}
+.mesgs {
+  float: left;
+  padding: 30px 15px 0 25px;
+  width: 100%;
+}
+.messaging {
+  padding: 0 0 50px 0;
 }
