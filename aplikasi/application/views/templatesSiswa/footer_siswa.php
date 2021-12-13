@@ -16,8 +16,8 @@
         <span class="nav__text">Tugas</span>
     </a>
     <a href="<?= base_url('siswa/absen') ?>" class="nav__link">
-        <i class="material-icons nav__icon">fingerprint</i>
-        <span class="nav__text">Absen</span>
+        <i class="material-icons nav__icon">description</i>
+        <span class="nav__text">Nilai</span>
     </a>
 
 </nav>

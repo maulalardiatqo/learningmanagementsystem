@@ -102,6 +102,18 @@ class Admin extends CI_Controller
         $this->load->view('admin/siswa', $data);
         $this->load->view('templates/footer');
     }
+    public function mapel()
+    {
+        $data['judul'] = 'Mapel';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['mapel'] = $this->db->get('mapel')->result_array();
+        $data['guru'] = $this->db->get('guru')->result_array();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/mapel', $data);
+        $this->load->view('templates/footer');
+    }
     public function guru()
     {
         $data['judul'] = 'Admin';
@@ -204,6 +216,9 @@ class Admin extends CI_Controller
 
         redirect('admin/siswa');
     }
+    public function tambahMapel()
+    {
+    }
     public function uploadSiswa()
     {
         $this->form_validation->set_rules('nis', 'NIS', 'is_unique[siswa.nis]|required');
@@ -265,7 +280,8 @@ class Admin extends CI_Controller
         $sql = "DELETE g.*, u.* FROM guru g, user u WHERE g.nuptk = $nuptk AND u.username = $nuptk";
         $this->db->query($sql, [$nuptk]);
 
-
+        $this->session->set_flashdata('flash', 'Data dihapus');
+        $this->session->set_flashdata('flashtype', 'success');
 
         redirect('admin/guru');
     }
@@ -274,7 +290,18 @@ class Admin extends CI_Controller
         $sql = "DELETE s.*, u.* FROM siswa s, user u WHERE s.nis = $nis AND u.username = $nis";
         $this->db->query($sql, [$nis]);
 
+        $this->session->set_flashdata('flash', 'Data dihapus');
+        $this->session->set_flashdata('flashtype', 'success');
         redirect('admin/siswa');
+    }
+    public function hapusMapel($id)
+    {
+        $sql = "DELETE FROM mapel WHERE id_mapel = $id";
+        $this->db->query($sql, [$id]);
+
+        $this->session->set_flashdata('flash', 'Data dihapus');
+        $this->session->set_flashdata('flashtype', 'success');
+        redirect('admin/mapel');
     }
 
 

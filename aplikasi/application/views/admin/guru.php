@@ -3,7 +3,7 @@
   <div id="flash-data" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
   <div class="row">
     <div class="col text-center">
-      <h3>Data Guru MTs Ihsaniyah</h3>
+      <h3>Data Guru SMK Al Amiriyah</h3>
     </div>
   </div>
 </div>
@@ -40,7 +40,7 @@
               <td class="text-center"><button class="btn btn-info">Lihat Jadwal Mengajar</button></td>
               <td class="text-center">
                 <button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
-                <a href="<?= base_url() ?>/admin/hapusGuru/<?= $g['nuptk']; ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                <a href="<?= base_url() ?>/admin/hapusGuru/<?= $g['nuptk']; ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash-alt"></i></a>
               </td>
 
             </tr>

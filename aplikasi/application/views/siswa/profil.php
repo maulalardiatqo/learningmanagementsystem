@@ -10,15 +10,15 @@
     <div class="d-flex justify-content-center">
         <img class="img-profile rounded-circle" src="<?= base_url('assets/img/') . $user['foto']; ?> " width="100" height="100">
     </div>
-    <div class="d-flex justify-content-center">
-        <label for="ganti">Ganti foto</label>
+    <div class="d-flex justify-content">
+        <label for="ganti" style="color: #80ced6;">Ganti foto</label>
     </div>
     <div class="d-flex justify-content-center">
         <input type="file">
     </div>
 
     <div class="mb-1 row">
-        <label for="staticEmail" class="col-sm-2 col-form-label" style="color: #80ced6;">Username :</label>
+        <label for="staticEmail" class="col-sm-2 col-form-label" style="color: #80ced6;">NIS :</label>
         <div class="col-sm-10">
             <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<?= $user['username']; ?>">
         </div>

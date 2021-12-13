@@ -38,6 +38,11 @@
             <i class="fas fa-user"></i>
             <span>Jadwal</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('admin/mapel') ?>">
+            <i class="fas fa-user"></i>
+            <span>Mapel</span></a>
+    </li>
 
 
 
