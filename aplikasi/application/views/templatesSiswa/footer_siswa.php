@@ -21,12 +21,12 @@
     </a>
 
 </nav>
-
+</div>
 <!-- Footer -->
-<footer class="sticky-footer bg-white">
+<footer class="sticky-footer" style="background-color: #343a40;">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span style="color:black;"> &copy; Copyright <?= date('Y'); ?> Develop : <a style="text-decoration: none;" href="http://maulalardiatqo.github.io">Maulal Ardi Atqo</a></span>
+            <span style="color: ghostwhite;"> &copy; Copyright <?= date('Y'); ?> Develop : <a style="text-decoration: none;" href="http://maulalardiatqo.github.io">Maulal Ardi Atqo</a></span>
         </div>
     </div>
 </footer>
@@ -37,6 +37,7 @@
 
 </div>
 <!-- End of Page Wrapper -->
+
 
 <!-- Scroll to Top Button-->
 <!-- <a class="scroll-to-top rounded" href="#page-top">
@@ -75,6 +76,14 @@
 <!-- Page level plugins -->
 <script src="<?= base_url('assets/') ?>vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url('assets/') ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(function() {
+        $("#edit_foto").change(function(event) {
+            var x = URL.createObjectURL(event.target.files[0]);
+            $("#gambar").attr("src", x);
+        })
+    })
+</script>
 
 <!-- Page level custom scripts -->
 <script src="<?= base_url('assets/') ?>js/demo/datatables-demo.js"></script>

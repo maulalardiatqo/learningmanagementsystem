@@ -61,10 +61,20 @@ class Siswa extends CI_Controller
     }
     public function profil()
     {
-        $data['judul'] = 'dashboard';
+
+        $data['judul'] = 'Edit Profil';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+
+        $this->form_validation->set_rules('passwordOld', 'Password', 'trim|required', [
+            'required' => 'Tidak Boleh Kosong'
+        ]);
+        $this->form_validation->set_rules('passwordNew', 'Password', 'required|trim|matches[passwordNewC]');
+        $this->form_validation->set_rules('passwordNewC', 'Password', 'required|trim|matches[passwordNew]');
         $this->load->view('templatesSiswa/topbar_siswa', $data);
         $this->load->view('siswa/profil', $data);
         $this->load->view('templatesSiswa/footer_siswa');
+    }
+    public function editProfile()
+    {
     }
 }

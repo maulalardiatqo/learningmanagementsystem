@@ -66,60 +66,37 @@
             <form action="<?= base_url('admin/tambahMapel') ?>" method="POST">
                 <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="kelas">Kelas</label>
-                        <select class="form-control" id="kelas" name="kelas">
-                            <?php foreach ($kelas as $k) : ?>
-                                <option value="<?= $k['id_kelas']; ?>"> <?= $k['tingkat']; ?> <?= $k['kelas_prodi']; ?> <?= $k['nama_kelas']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <div class="form-group row">
+                        <label for="nama_mapel" class="col-sm-4 col-form-label">Nama Mapel</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="nama_mapel" id="nama_mapel">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="hari">Hari</label>
-                        <select name="hari" id="Hari" class="form-control">
-                            <option>Senin</option>
-                            <option>Selasa</option>
-                            <option>Rabu</option>
-                            <option>Kamis</option>
-                            <option>Jum'at</option>
-                            <option>Sabtu</option>
-                        </select>
+                    <div class="form-group row">
+                        <label for="status_mapel" class="col-sm-4 col-form-label">Status Mapel</label>
+                        <div class="col-sm-8">
+                            <select name="status_mapel" id="status_mapel" class="form-control">
+                                <option value="Produktif">Produktif</option>
+                                <option value="Normatif">Normatif</option>
+                            </select>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="guru">Guru</label>
-                        <select class="form-control" id="guru" name="guru">
-                            <?php foreach ($guru as $g) : ?>
-                                <option value="<?= $g['id_guru']; ?>"><?= $g['nama_guru']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <div class="form-group row">
+                        <label for="jp_mapel" class="col-sm-4 col-form-label">Jumlah Jam Pelajaran</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="jp_mapel" id="jp_mapel">
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="maple">Mapel</label>
-                        <select class="form-control" id="mapel" name="mapel">
-                            <?php foreach ($mapel as $m) : ?>
-                                <option value="<?= $m['id_mapel']; ?>"><?= $m['nama_mapel']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <div class="form-group row">
+                        <label for="guru_mapel" class="col-sm-4 col-form-label">Guru Pengampu</label>
+                        <div class="col-sm-8">
+                            <select name="guru_mapel" id="guru_mapel" class="form-control">
+                                <?php foreach ($guru as $g) : ?>
+                                    <option value="<?= $g['nama_guru']; ?>"><?= $g['nama_guru']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="jam">Jam masuk</label>
-                        <select class="form-control" name="jam_masuk" id="jam_masuk">
-                            <?php foreach ($jammengajar as $j) : ?>
-                                <option value="<?= $j['id_jam']; ?>"><?= $j['jam_ke'] . '. (' . $j['pukul']; ?>)</option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="jam">Jam keluar</label>
-                        <select class="form-control" name="jam_keluar" id="jam_keluar">
-                            <?php foreach ($jammengajar as $j) : ?>
-                                <option value="<?= $j['id_jam']; ?>"><?= $j['jam_ke'] . '. (' . $j['pukul']; ?>)</option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
 
                 </div>
 

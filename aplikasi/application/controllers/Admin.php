@@ -218,6 +218,17 @@ class Admin extends CI_Controller
     }
     public function tambahMapel()
     {
+        $this->form_validation->set_rules('nama_mapel', 'Nama Mapel', 'required');
+
+        $data = $this->input->post();
+        if ($this->form_validation->run()) {
+            $this->db->insert('mapel', $data);
+            $this->session->set_flashdata('flash', 'Berhasil Insert');
+        } else {
+            $this->session->set_flashdata('flash', 'Gagal Menyimpan, Periksa Kembali');
+            $this->session->set_flashdata('flashtype', 'info');
+        }
+        redirect('admin/mapel');
     }
     public function uploadSiswa()
     {
