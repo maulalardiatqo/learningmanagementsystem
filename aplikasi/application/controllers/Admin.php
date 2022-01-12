@@ -44,6 +44,7 @@ class Admin extends CI_Controller
         // $data['prodi'] = $this->db->get('prodi')->result_array();
         $Nprodi = 'TKJ';
         $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
+        $data['kelas'] = $this->db->get_where('kelas', ['kelas_prodi' => $Nprodi])->num_rows();
 
 
         $this->load->view('templates/header', $data);
@@ -56,9 +57,7 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
-        $Nprodi = 'TKR-O';
-
-
+        $Nprodi = 'TKR';
         $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -95,6 +94,7 @@ class Admin extends CI_Controller
         $data['judul'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $data['siswa'] = $this->db->get('siswa')->result_array();
+        $data['prodi'] = $this->db->get('prodi')->result_array();
         $data['kelas'] = $this->db->get('kelas')->result_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -108,6 +108,7 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $data['mapel'] = $this->db->get('mapel')->result_array();
         $data['guru'] = $this->db->get('guru')->result_array();
+        $data['kelas'] = $this->db->get('kelas')->result_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -150,7 +151,7 @@ class Admin extends CI_Controller
             $data = [
                 'id_kelas' => $this->input->post('kelas'),
                 'hari' => $this->input->post('hari'),
-                'id_guru' => $this->input->post('guru'),
+                'nuptk_guru' => $this->input->post('guru'),
                 'id_mapel' => $this->input->post('mapel'),
                 'jam_masuk' => $this->input->post('jam_masuk'),
                 'jam_keluar' => $this->input->post('jam_keluar')
@@ -356,7 +357,7 @@ class Admin extends CI_Controller
         $queryJadwalPerhari = "SELECT * FROM jadwal
             LEFT JOIN kelas ON jadwal.id_kelas = kelas.id_kelas
             LEFT JOIN mapel ON jadwal.id_mapel = mapel.id_mapel
-            LEFT JOIN guru ON jadwal.id_guru = guru.id_guru
+            LEFT JOIN guru ON jadwal.nuptk_guru = guru.nuptk
             WHERE jadwal.id_kelas = " . $idKelas;
         $data['jadwalPerhari'] = $this->db->query($queryJadwalPerhari)->result_array();
         echo json_encode($data);

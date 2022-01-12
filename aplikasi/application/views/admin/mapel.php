@@ -24,6 +24,7 @@
                     <tr>
                         <th>No</th>
                         <th>Mapel</th>
+                        <th>kelas</th>
                         <th>Status Mapel</th>
                         <th>Guru Pengampu</th>
                         <th>Jumlah jam</th>
@@ -37,6 +38,7 @@
                         <tr>
                             <td><?= $i; ?></td>
                             <td><?= $u['nama_mapel']; ?></td>
+                            <td><?= $u['kelas_mapel']; ?></td>
                             <td><?= $u['status_mapel']; ?></td>
                             <td><?= $u['guru_mapel']; ?></td>
                             <td><?= $u['jp_mapel']; ?></td>
@@ -97,7 +99,16 @@
                             </select>
                         </div>
                     </div>
-
+                    <div class="form-group row">
+                        <label for="kelas_mapel" class="col-sm-4 col-form-label">Kelas</label>
+                        <div class="col-sm-8">
+                            <select name="kelas_mapel" id="kelas_mapel" class="form-control">
+                                <?php foreach ($kelas as $k) : ?>
+                                    <option value="<?= $k['id_kelas']; ?>"> <?= $k['tingkat']; ?> <?= $k['kelas_prodi']; ?> <?= $k['nama_kelas']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="modal-footer">

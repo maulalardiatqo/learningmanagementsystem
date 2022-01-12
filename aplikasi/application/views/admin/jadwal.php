@@ -103,7 +103,7 @@
                         <label for="guru">Guru</label>
                         <select class="form-control" id="guru" name="guru">
                             <?php foreach ($guru as $g) : ?>
-                                <option value="<?= $g['id_guru']; ?>"><?= $g['nama_guru']; ?></option>
+                                <option value="<?= $g['nuptk']; ?>"><?= $g['nama_guru']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

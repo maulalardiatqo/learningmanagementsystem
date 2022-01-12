@@ -72,6 +72,9 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/') ?>js/sb-admin-2.min.js"></script>
+<!-- Sweet allert-->
+<script src="<?= base_url('assets/') ?>sj/dist/sweetalert2.all.min.js"></script>
+<script src="<?= base_url('assets/') ?>sj/scriptku.js"></script>
 
 <!-- Page level plugins -->
 <script src="<?= base_url('assets/') ?>vendor/datatables/jquery.dataTables.min.js"></script>

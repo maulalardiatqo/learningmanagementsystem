@@ -107,6 +107,17 @@
                         <input class="form-control" type="text" id="kontak" name="kontak">
                     </div>
                     <div class="form-group">
+                        <label for="prodi">Prodi</label>
+                    </div>
+                    <div class="dropdown">
+                        <select name="prodi" id="prodi" class="btn btn-secondary dropdown-toggle">
+                            <?php foreach ($prodi as $pr) : ?>
+                                <option value="<?= $pr['nama_prodi'] ?>"><?= $pr['nama_prodi'] ?></option>
+                            <?php endforeach ?>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
                         <label for="prodi">Kelas</label>
                     </div>
                     <div class="dropdown">
