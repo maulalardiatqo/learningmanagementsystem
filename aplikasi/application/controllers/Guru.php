@@ -38,6 +38,7 @@ class Guru extends CI_Controller
         $this->load->view('guru/jadwal', $data);
         $this->load->view('templates/footer_nav_guru');
         $this->load->view('templates/footer_guru');
+        // test changes
     }
     public function tugas()
     {
