@@ -13,7 +13,7 @@
             <span>maulalardiatqo123@gmail.com </span>
         </div>
         <div class="button">
-            <div class="icon"><i class="fa-brands fa-github"></i></div>
+            <div class="icon"><i class="fab fa-chrome"></i></div>
             <span>maulalardiatqo.github.io </span>
         </div>
         <div class="button">

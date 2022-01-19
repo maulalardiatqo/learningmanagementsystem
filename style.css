@@ -49,7 +49,10 @@
   background-color: rgb(236, 21, 21);
 }
 .wrapper .button:nth-child(4):hover .icon {
-  background-color: rgb(14, 211, 178);
+  background-color: rgb(14, 211, 178);;
+}
+.wrapper .button:nth-child(5):hover .icon {
+  background-color: rgb(1, 17, 14);
 }
 
 .wrapper .button .icon i {
@@ -81,4 +84,7 @@
 }
 .wrapper .button:nth-child(4) span {
   color: rgb(14, 211, 178);
+}
+.wrapper .button:nth-child(5):hover .icon {
+  background-color: rgb(1, 17, 14);
 }

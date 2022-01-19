@@ -123,7 +123,7 @@
                     <div class="dropdown">
                         <select name="kelas" id="kelas" class="btn btn-secondary dropdown-toggle">
                             <?php foreach ($kelas as $p) : ?>
-                                <option value="<?= $p['tingkat'] . $p['kelas_prodi'] . $p['nama_kelas']; ?>"><?= $p['tingkat'] . ' ' . $p['kelas_prodi'] . ' ' . $p['nama_kelas']; ?></option>
+                                <option value="<?= $p['id_kelas']; ?>"><?= $p['tingkat'] . ' ' . $p['kelas_prodi'] . ' ' . $p['nama_kelas']; ?></option>
                             <?php endforeach ?>
                         </select>
 

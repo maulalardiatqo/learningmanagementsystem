@@ -12,4 +12,7 @@ class siswaModel extends CI_Model
             $this->db->replace('user', $dataUser);
         }
     }
+    public function getMapel($id_mapel, $id_kelas)
+    {
+    }
 }
