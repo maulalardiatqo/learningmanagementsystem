@@ -29,7 +29,11 @@ class Siswa extends CI_Controller
     {
         $data['judul'] = 'dashboard';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
-        $data['mapel'] = $this->db->get('mapel')->result_array();
+        $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
+        $data['mapel'] = $this->db->get_where('mapel', ['kelas_mapel' => $data['siswa']['kelas']])->result_array();
+       
+
+        // $data['mapel'] = $this->db->get('mapel')->result_array();
         $this->load->view('templatesSiswa/topbar_siswa', $data);
         $this->load->view('siswa/materi', $data);
         $this->load->view('templatesSiswa/footer_siswa');
@@ -65,12 +69,18 @@ class Siswa extends CI_Controller
         $data['judul'] = 'Edit Profil';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
 
+        $this->form_validation->set_rules('nama', 'nis', 'required|trim', [
+            'required' => 'Tidak Boleh Kosong'
+        ]);
 
+       
         if ($this->form_validation->run() == false) {
+           
             $this->load->view('templatesSiswa/topbar_siswa', $data);
             $this->load->view('siswa/profil', $data);
             $this->load->view('templatesSiswa/footer_siswa');
         } else {
+            
             $nis = $this->input->post('nis');
             $nama = $this->input->post('nama');
 
@@ -81,6 +91,8 @@ class Siswa extends CI_Controller
                 $config['allowed_types'] = 'gif|png|jpg';
                 $config['max_size'] = '3048';
                 $config['upload_path'] = './assets/img/';
+                $config['width']= 300;
+                $config['height']= 300;
 
                 $this->load->library('upload', $config);
 

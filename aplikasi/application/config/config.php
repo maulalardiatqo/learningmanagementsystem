@@ -25,6 +25,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $config['base_url'] = 'http://localhost/skripsi_lms/aplikasi/';
 
+// $config['base_url'] = 'http://localhost/learningmanagementsystem/aplikasi/';
+
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -9,7 +9,7 @@
     <?= form_open_multipart('siswa/profil') ?>
     <div class="d-flex justify-content-center">
         <div class="bungkus">
-            <img class="img-profile" id="gambar" src="<?= base_url('assets/img/') . $user['foto']; ?> " height="130" width="130" style="clip-path: circle();">
+            <img class="img-profile" id="gambar" src="<?= base_url('assets/img/') . $user['foto']; ?> " height="130" width="130" style="clip-path: circle();height:130px;width:130px;object-fit:none;">
         </div>
 
         <div class="d-flex justify-content form-group">
