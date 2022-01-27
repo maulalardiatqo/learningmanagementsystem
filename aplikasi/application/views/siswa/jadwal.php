@@ -9,214 +9,41 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h6 style="color: aliceblue;"> <b>Senin</b> </h6>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Mapel</th>
-                                <th scope="col">Jam</th>
-                                <th scope="col">Guru</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Bahasa Indonesia</td>
-                                <td>07.00 - 09.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Bahasa Inggris</td>
-                                <td>09.00 - 10.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
+            <?php foreach ($jadwal as $j) : ?>
 
-                        </tbody>
-                    </table>
+                <div class="card mt-3">
+                    <div class="card-header bg-success">
+                        <h6 style="color: aliceblue;"> <b><?= $j['hari']; ?></b> </h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Mapel</th>
+                                    <th scope="col">Jam</th>
+                                    <th scope="col">Guru</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1; ?>
+                                <?php foreach ($jadwal as $jd) : ?>
+                                    <?php if ($jd['hari'] == $j['hari']) { ?>
+                                        <tr>
+                                            <th scope="row"><?= $i; ?></th>
+                                            <td><?= $jd['nama_mapel'] ?></td>
+                                            <td><?= $jd['jam_masuk'] ?></td>
+                                            <td><?= $jd['nama_guru'] ?></td>
+                                        </tr>
+                                    <?php  } ?>
+
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
         </div>
-
-        <div class="col">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h6 style="color: aliceblue;"> <b>Selasa</b> </h6>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Mapel</th>
-                                <th scope="col">Jam</th>
-                                <th scope="col">Guru</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Bahasa Indonesia</td>
-                                <td>07.00 - 09.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Bahasa Inggris</td>
-                                <td>09.00 - 10.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h6 style="color: aliceblue;"> <b>Rabu</b> </h6>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Mapel</th>
-                                <th scope="col">Jam</th>
-                                <th scope="col">Guru</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Bahasa Indonesia</td>
-                                <td>07.00 - 09.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Bahasa Inggris</td>
-                                <td>09.00 - 10.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h6 style="color: aliceblue;"> <b>Kamis</b> </h6>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Mapel</th>
-                                <th scope="col">Jam</th>
-                                <th scope="col">Guru</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Bahasa Indonesia</td>
-                                <td>07.00 - 09.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Bahasa Inggris</td>
-                                <td>09.00 - 10.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h6 style="color: aliceblue;"> <b>Jum'at </b> </h6>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Mapel</th>
-                                <th scope="col">Jam</th>
-                                <th scope="col">Guru</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Bahasa Indonesia</td>
-                                <td>07.00 - 09.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Bahasa Inggris</td>
-                                <td>09.00 - 10.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <div class="card-header bg-success">
-                    <h6 style="color: aliceblue;"> <b>Sabtu</b> </h6>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Mapel</th>
-                                <th scope="col">Jam</th>
-                                <th scope="col">Guru</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Bahasa Indonesia</td>
-                                <td>07.00 - 09.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Bahasa Inggris</td>
-                                <td>09.00 - 10.00</td>
-                                <td>Sutarno, S.Sg</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
 
 
     </div>

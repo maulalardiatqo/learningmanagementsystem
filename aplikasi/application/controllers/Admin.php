@@ -45,13 +45,47 @@ class Admin extends CI_Controller
         $Nprodi = 'TKJ';
         $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
         $data['kelas'] = $this->db->get_where('kelas', ['kelas_prodi' => $Nprodi])->num_rows();
+        $data['guru'] = $this->db->get('guru')->result_array();
+        // $data['tkj'] = $this->db->get_where('kelas', ['kelas_prodi' => $Nprodi])->result_array();
+        $this->db->select('*');
+        $this->db->from('kelas');
+        $this->db->join('guru', 'guru.nuptk = kelas.wali_kelas');
+        $data['tkj'] = $this->db->get()->result_array();
+        // $this->load->model('Prodi_model', 'prodi');
 
+        $this->form_validation->set_rules('tingkat', 'Tingkat', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/tkj', $data);
+            $this->load->view('templates/footer');
+        } else {
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/tkj', $data);
-        $this->load->view('templates/footer');
+            $data = [
+
+                'kelas_prodi' => 'TKJ',
+                'tingkat' => $this->input->post('tingkat'),
+                'nama_kelas' => $this->input->post('nama_kelas'),
+                'wali_kelas' => $this->input->post('wali_kelas'),
+            ];
+            $cek = "SELECT * FROM kelas WHERE tingkat= '" . $data['tingkat'] . "' AND nama_kelas = '" . $data['nama_kelas'] . "'";
+            $walas = "SELECT * FROM kelas WHERE wali_kelas = '" . $data['wali_kelas'] . "'";
+            $selek = $this->db->query($cek)->num_rows();
+            $cwalas = $this->db->query($walas)->num_rows();
+            if ($selek > 0) {
+                $this->session->set_flashdata('flash', 'Data Kelas Sudah ada !');
+                $this->session->set_flashdata('flashtype', 'info');
+            } elseif ($cwalas > 0) {
+                $this->session->set_flashdata('flash', 'Walikelas Sudah Terdata !');
+                $this->session->set_flashdata('flashtype', 'info');
+            } else {
+                $this->db->insert('kelas', $data);
+                $this->session->set_flashdata('flash', 'Berhasil Insert');
+                $this->session->set_flashdata('flashtype', 'success');
+            }
+            redirect('admin/tkj');
+        }
     }
     public function tkro()
     {
@@ -59,23 +93,82 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $Nprodi = 'TKR';
         $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/tkro', $data);
-        $this->load->view('templates/footer');
+        $data['guru'] = $this->db->get('guru')->result_array();
+        $data['tkr'] = $this->db->get_where('kelas', ['kelas_prodi' => $Nprodi])->result_array();
+        $this->form_validation->set_rules('tingkat', 'Tingkat', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/tkro', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+
+                'kelas_prodi' => 'TKR',
+                'tingkat' => $this->input->post('tingkat'),
+                'nama_kelas' => $this->input->post('nama_kelas'),
+                'wali_kelas' => $this->input->post('wali_kelas'),
+            ];
+            $cek = "SELECT * FROM kelas WHERE tingkat= '" . $data['tingkat'] . "' AND nama_kelas = '" . $data['nama_kelas'] . "'";
+            $walas = "SELECT * FROM kelas WHERE wali_kelas = '" . $data['wali_kelas'] . "'";
+            $selek = $this->db->query($cek)->num_rows();
+            $cwalas = $this->db->query($walas)->num_rows();
+            if ($selek > 0) {
+                $this->session->set_flashdata('flash', 'Data Kelas Sudah ada !');
+                $this->session->set_flashdata('flashtype', 'info');
+            } elseif ($cwalas > 0) {
+                $this->session->set_flashdata('flash', 'Walikelas Sudah Terdata !');
+                $this->session->set_flashdata('flashtype', 'info');
+            } else {
+                $this->db->insert('kelas', $data);
+                $this->session->set_flashdata('flash', 'Berhasil Insert');
+                $this->session->set_flashdata('flashtype', 'success');
+            }
+            redirect('admin/tkro');
+        }
     }
     public function apm()
     {
         $data['judul'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $Nprodi = 'APM';
+        $data['guru'] = $this->db->get('guru')->result_array();
         $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/apm', $data);
-        $this->load->view('templates/footer');
+        $data['guru'] = $this->db->get('guru')->result_array();
+        $data['apm'] = $this->db->get_where('kelas', ['kelas_prodi' => $Nprodi])->result_array();
+        $this->form_validation->set_rules('tingkat', 'Tingkat', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/apm', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+
+                'kelas_prodi' => 'APM',
+                'tingkat' => $this->input->post('tingkat'),
+                'nama_kelas' => $this->input->post('nama_kelas'),
+                'wali_kelas' => $this->input->post('wali_kelas'),
+            ];
+            $cek = "SELECT * FROM kelas WHERE tingkat= '" . $data['tingkat'] . "' AND nama_kelas = '" . $data['nama_kelas'] . "'";
+            $walas = "SELECT * FROM kelas WHERE wali_kelas = '" . $data['wali_kelas'] . "'";
+            $selek = $this->db->query($cek)->num_rows();
+            $cwalas = $this->db->query($walas)->num_rows();
+            if ($selek > 0) {
+                $this->session->set_flashdata('flash', 'Data Kelas Sudah ada !');
+                $this->session->set_flashdata('flashtype', 'info');
+            } elseif ($cwalas > 0) {
+                $this->session->set_flashdata('flash', 'Walikelas Sudah Terdata !');
+                $this->session->set_flashdata('flashtype', 'info');
+            } else {
+                $this->db->insert('kelas', $data);
+                $this->session->set_flashdata('flash', 'Berhasil Insert');
+                $this->session->set_flashdata('flashtype', 'success');
+            }
+            redirect('admin/apm');
+        }
     }
     public function prodi()
     {
@@ -296,6 +389,24 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('flashtype', 'success');
 
         redirect('admin/guru');
+    }
+    public function hapusKelas($id_kelas)
+    {
+        $sql = "DELETE FROM kelas WHERE id_kelas = $id_kelas";
+        $this->db->query($sql, [$id_kelas]);
+
+        $this->session->set_flashdata('flash', 'Data dihapus');
+        $this->session->set_flashdata('flashtype', 'success');
+        redirect('admin/tkj');
+    }
+    public function hapusJadwal($id_jadwal)
+    {
+        $sql = "DELETE FROM jadwal WHERE id_jadwal = $id_jadwal";
+        $this->db->query($sql, [$id_jadwal]);
+
+        $this->session->set_flashdata('flash', 'Data dihapus');
+        $this->session->set_flashdata('flashtype', 'success');
+        redirect('admin/jadwal');
     }
     public function hapusSiswa($nis)
     {

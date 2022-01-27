@@ -5,8 +5,7 @@
         </div>
     </div>
 </div>
-<?= form_error('hari', '<div class="alert alert-danger" role="alert">', '</div>') ?>
-<?= $this->session->flashdata('message'); ?>
+<div id="flash-data" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
 <div class="container mt-3 mb-3">
     <div class="row">
         <div class="col">
@@ -54,7 +53,7 @@
                             <td>Jam Ke - <?= $u['jam_keluar'] . ' Pukul : ' . explode("-", $u['pukul_keluar'])[1]; ?></td>
 
                             <td><button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                <a href="<?= base_url() ?>/admin/hapusJadwal/<?= $u['id_jadwal'] ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         <?php $i++; ?>
