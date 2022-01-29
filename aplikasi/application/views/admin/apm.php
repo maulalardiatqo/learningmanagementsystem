@@ -75,18 +75,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
+                    <?php $i = 1;
+                    $prodi = 'APM' ?>
                     <?php foreach ($apm as $k) : ?>
-                        <tr>
-                            <td><?= $i ?></td>
-                            <td><?= $k['tingkat']; ?></td>
-                            <td><?= $k['kelas_prodi']; ?></td>
-                            <td><?= $k['nama_kelas']; ?></td>
-                            <td><?= $k['wali_kelas']; ?></td>
-                            <td><button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
-                                <a href="<?= base_url() ?>/admin/hapusKelas/<?= $k['id_kelas'] ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
+                        <?php if ($k['kelas_prodi'] == $prodi) { ?>
+                            <tr>
+                                <td><?= $i ?></td>
+                                <td><?= $k['tingkat']; ?></td>
+                                <td><?= $k['kelas_prodi']; ?></td>
+                                <td><?= $k['nama_kelas']; ?></td>
+                                <td><?= $k['nama_guru']; ?></td>
+                                <td><button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
+                                    <a href="<?= base_url() ?>/admin/hapusKelas/<?= $k['id_kelas'] ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <?php $i++; ?>
+                        <?php } ?>
                     <?php endforeach; ?>
 
                 </tbody>

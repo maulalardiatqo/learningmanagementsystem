@@ -19,7 +19,7 @@ class Siswa extends CI_Controller
     }
     public function jadwal()
     {
-        $data['judul'] = 'dashboard';
+        $data['judul'] = 'Jadwal';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $this->load->model('Jadwal_model', 'jadwal');
         $id_kelas = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
@@ -30,7 +30,7 @@ class Siswa extends CI_Controller
     }
     public function materi()
     {
-        $data['judul'] = 'dashboard';
+        $data['judul'] = 'Mata Pelajaran';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
         $data['mapel'] = $this->db->get_where('mapel', ['kelas_mapel' => $data['siswa']['kelas']])->result_array();
@@ -41,9 +41,22 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/materi', $data);
         $this->load->view('templatesSiswa/footer_siswa');
     }
+    public function pelajaran($id_mapel)
+    {
+        $data['judul'] = 'Materi Pelajaran';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
+        $data['mapel'] = $this->db->get_where('mapel', ['kelas_mapel' => $data['siswa']['kelas']])->result_array();
+        $data['materi'] = $this->db->get_where('materi', ['id_mapel' => $id_mapel])->result_array();
+
+        // $data['mapel'] = $this->db->get('mapel')->result_array();
+        $this->load->view('templatesSiswa/topbar_siswa', $data);
+        $this->load->view('siswa/pelajaran', $data, $id_mapel);
+        $this->load->view('templatesSiswa/footer_siswa');
+    }
     public function tugas()
     {
-        $data['judul'] = 'dashboard';
+        $data['judul'] = 'Tugas';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $this->load->view('templatesSiswa/topbar_siswa', $data);
         $this->load->view('siswa/tugas', $data);
@@ -51,7 +64,7 @@ class Siswa extends CI_Controller
     }
     public function ujian()
     {
-        $data['judul'] = 'dashboard';
+        $data['judul'] = 'Ujian';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $this->load->view('templatesSiswa/topbar_siswa', $data);
         $this->load->view('siswa/ujian', $data);

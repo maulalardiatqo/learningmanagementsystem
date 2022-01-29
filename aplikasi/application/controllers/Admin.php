@@ -69,7 +69,7 @@ class Admin extends CI_Controller
                 'nama_kelas' => $this->input->post('nama_kelas'),
                 'wali_kelas' => $this->input->post('wali_kelas'),
             ];
-            $cek = "SELECT * FROM kelas WHERE tingkat= '" . $data['tingkat'] . "' AND nama_kelas = '" . $data['nama_kelas'] . "'";
+            $cek = "SELECT * FROM kelas WHERE tingkat= '" . $data['tingkat'] . "' AND nama_kelas = '" . $data['nama_kelas'] . "' AND kelas_prodi = '" . $data['kelas_prodi'] . "'";
             $walas = "SELECT * FROM kelas WHERE wali_kelas = '" . $data['wali_kelas'] . "'";
             $selek = $this->db->query($cek)->num_rows();
             $cwalas = $this->db->query($walas)->num_rows();
@@ -94,7 +94,10 @@ class Admin extends CI_Controller
         $Nprodi = 'TKR';
         $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
         $data['guru'] = $this->db->get('guru')->result_array();
-        $data['tkr'] = $this->db->get_where('kelas', ['kelas_prodi' => $Nprodi])->result_array();
+        $this->db->select('*');
+        $this->db->from('kelas');
+        $this->db->join('guru', 'guru.nuptk = kelas.wali_kelas');
+        $data['tkr'] = $this->db->get()->result_array();
         $this->form_validation->set_rules('tingkat', 'Tingkat', 'required');
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -110,7 +113,7 @@ class Admin extends CI_Controller
                 'nama_kelas' => $this->input->post('nama_kelas'),
                 'wali_kelas' => $this->input->post('wali_kelas'),
             ];
-            $cek = "SELECT * FROM kelas WHERE tingkat= '" . $data['tingkat'] . "' AND nama_kelas = '" . $data['nama_kelas'] . "'";
+            $cek = "SELECT * FROM kelas WHERE tingkat= '" . $data['tingkat'] . "' AND nama_kelas = '" . $data['nama_kelas'] . "' AND kelas_prodi = '" . $data['kelas_prodi'] . "'";
             $walas = "SELECT * FROM kelas WHERE wali_kelas = '" . $data['wali_kelas'] . "'";
             $selek = $this->db->query($cek)->num_rows();
             $cwalas = $this->db->query($walas)->num_rows();
@@ -136,7 +139,10 @@ class Admin extends CI_Controller
         $data['guru'] = $this->db->get('guru')->result_array();
         $data['prodi'] = $this->db->get_where('prodi', ['nama_prodi' => $Nprodi])->row_array();
         $data['guru'] = $this->db->get('guru')->result_array();
-        $data['apm'] = $this->db->get_where('kelas', ['kelas_prodi' => $Nprodi])->result_array();
+        $this->db->select('*');
+        $this->db->from('kelas');
+        $this->db->join('guru', 'guru.nuptk = kelas.wali_kelas');
+        $data['apm'] = $this->db->get()->result_array();
         $this->form_validation->set_rules('tingkat', 'Tingkat', 'required');
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -152,7 +158,7 @@ class Admin extends CI_Controller
                 'nama_kelas' => $this->input->post('nama_kelas'),
                 'wali_kelas' => $this->input->post('wali_kelas'),
             ];
-            $cek = "SELECT * FROM kelas WHERE tingkat= '" . $data['tingkat'] . "' AND nama_kelas = '" . $data['nama_kelas'] . "'";
+            $cek = "SELECT * FROM kelas WHERE tingkat= '" . $data['tingkat'] . "' AND nama_kelas = '" . $data['nama_kelas'] . "' AND kelas_prodi = '" . $data['kelas_prodi'] . "'";
             $walas = "SELECT * FROM kelas WHERE wali_kelas = '" . $data['wali_kelas'] . "'";
             $selek = $this->db->query($cek)->num_rows();
             $cwalas = $this->db->query($walas)->num_rows();
@@ -186,9 +192,13 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
-        $data['siswa'] = $this->db->get('siswa')->result_array();
+        // $data['siswa'] = $this->db->get('siswa')->result_array();
         $data['prodi'] = $this->db->get('prodi')->result_array();
         $data['kelas'] = $this->db->get('kelas')->result_array();
+        $this->db->select('*');
+        $this->db->from('siswa');
+        $this->db->join('kelas', 'kelas.id_kelas = siswa.kelas');
+        $data['siswa'] = $this->db->get()->result_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

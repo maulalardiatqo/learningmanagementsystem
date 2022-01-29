@@ -19,10 +19,23 @@ class Guru extends CI_Controller
     }
     public function kelas()
     {
-        $data['judul'] = 'Guru';
+        $data['judul'] = 'Kelas';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $this->db->select('*');
+        $this->db->from('kelas');
+        $this->db->join('jadwal', 'jadwal.id_kelas = kelas.id_kelas');
+        $data['cetak'] = $this->db->get()->result_array();
         $this->load->view('templates/header_guru', $data);
         $this->load->view('guru/kelas', $data);
+        $this->load->view('templates/footer_nav_guru');
+        $this->load->view('templates/footer_guru');
+    }
+    public function materi($id_kelas)
+    {
+        $data['judul'] = 'Materi';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $this->load->view('templates/header_guru', $data);
+        $this->load->view('guru/materi', $data);
         $this->load->view('templates/footer_nav_guru');
         $this->load->view('templates/footer_guru');
     }

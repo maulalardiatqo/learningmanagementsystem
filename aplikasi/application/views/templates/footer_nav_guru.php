@@ -9,7 +9,7 @@
     </a>
     <a href="<?= base_url('guru/kelas') ?>" class="nav__link">
         <i class="material-icons nav__icon">menu_book</i>
-        <span class="nav__text">Materi</span>
+        <span class="nav__text">Kelas</span>
     </a>
     <a href="<?= base_url('guru/tugas') ?>" class="nav__link">
         <i class="material-icons nav__icon">edit_note</i>

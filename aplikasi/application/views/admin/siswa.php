@@ -25,15 +25,15 @@
 
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>NIS</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Gender</th>
-                        <th>Kontak</th>
-                        <th>Kelas</th>
-                        <th>Nama Ibu</th>
-                        <th>Aksi</th>
+                        <th><small><b>No</b></small></th>
+                        <th><small><b>NIS</b></small></th>
+                        <th><small><b>Nama</b></small></th>
+                        <th><small><b>Alamat</b></small></th>
+                        <th><small><b>Gender</b></small></th>
+                        <th><small><b>Kontak</b></small></th>
+                        <th><small><b>Kelas</b></small></th>
+                        <th><small><b>Nama Ibu</b></small></th>
+                        <th><small><b>Aksi</b></small></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,14 +41,16 @@
                     <?php foreach ($siswa as $s) : ?>
                         <tr>
                             <td><?= $i; ?></td>
-                            <td><?= $s['nis']; ?></td>
-                            <td><?= $s['nama_siswa']; ?></td>
-                            <td><?= $s['alamat']; ?></td>
-                            <td><?= $s['gender']; ?></td>
-                            <td><?= $s['kontak']; ?></td>
-                            <td><?= $s['kelas']; ?></td>
-                            <td><?= $s['nama_ibu']; ?></td>
-                            <td><button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
+                            <td><small><?= $s['nis']; ?></small></td>
+                            <td><small><?= $s['nama_siswa']; ?></small></td>
+                            <td><small><?= $s['alamat']; ?></small></td>
+                            <td><small><?= $s['gender']; ?></small></td>
+                            <td><small><?= $s['kontak']; ?></small></td>
+                            <td><small><?= $s['tingkat'] . ' ' . $s['kelas_prodi'] . ' ' . $s['nama_kelas']; ?></small></td>
+                            <td><small>
+                                    <?= $s['nama_ibu']; ?> </small>
+                            </td>
+                            <td><small><button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button></small>
                                 <a href="<?= base_url() ?>/admin/hapusSiswa/<?= $s['nis']; ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
