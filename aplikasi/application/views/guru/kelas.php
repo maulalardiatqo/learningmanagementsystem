@@ -11,7 +11,7 @@
 
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="30px">No</th>
                             <th>Kelas</th>
                         </tr>
                     </thead>

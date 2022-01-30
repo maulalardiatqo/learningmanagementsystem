@@ -25,6 +25,8 @@
     <!-- icon -->
     <link rel="shorcut icon" href="<?= base_url('asstes/') ?>img/kemenag.png">
     <link rel="stylesheet" href="<?= base_url('assets/') ?>css/style1.css">
+    <!-- ckeditor -->
+    <script src="<?= base_url('assets/') ?>ckeditor/ckeditor.js"></script>
 
 </head>
 

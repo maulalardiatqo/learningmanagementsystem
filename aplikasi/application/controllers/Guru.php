@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+require_once APPPATH . 'third_party/Spout/AutoLoader/autoload.php';
+
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+
 
 class Guru extends CI_Controller
 {
@@ -24,6 +28,7 @@ class Guru extends CI_Controller
         $this->db->select('*');
         $this->db->from('kelas');
         $this->db->join('jadwal', 'jadwal.id_kelas = kelas.id_kelas');
+        $this->db->group_by('kelas.id_kelas');
         $data['cetak'] = $this->db->get()->result_array();
         $this->load->view('templates/header_guru', $data);
         $this->load->view('guru/kelas', $data);
@@ -38,6 +43,25 @@ class Guru extends CI_Controller
         $this->load->view('guru/materi', $data);
         $this->load->view('templates/footer_nav_guru');
         $this->load->view('templates/footer_guru');
+    }
+    public function kirimMateri()
+    {
+        $data['judul'] = 'Upload Materi';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['mapel'] = $this->db->get_where('mapel', ['guru_mapel' => $data['user']['username']])->result_array();
+        $this->load->view('templates/header_guru', $data);
+        $this->load->view('guru/kirimMateri', $data);
+        $this->load->view('templates/footer_nav_guru');
+        $this->load->view('templates/footer_guru');
+    }
+    public function uploadMateri()
+    {
+        $this->form_validation->set_rules('materi', 'Materi', 'required');
+        //uplad file
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'doc|pdf';
+        $config['file_name'] = 'doc' . time();
+        $this->load->library('upload', $config);
     }
     public function jadwal()
     {

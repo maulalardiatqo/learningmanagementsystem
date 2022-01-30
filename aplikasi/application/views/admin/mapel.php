@@ -40,7 +40,7 @@
                             <td><?= $u['nama_mapel']; ?></td>
                             <td><?= $u['kelas_mapel']; ?></td>
                             <td><?= $u['status_mapel']; ?></td>
-                            <td><?= $u['guru_mapel']; ?></td>
+                            <td><?= $u['nama_guru']; ?></td>
                             <td><?= $u['jp_mapel']; ?></td>
                             <td><button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
                                 <a href="<?= base_url() ?>/admin/hapusMapel/<?= $u['id_mapel'] ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash-alt"></i></a>
@@ -94,7 +94,7 @@
                         <div class="col-sm-8">
                             <select name="guru_mapel" id="guru_mapel" class="form-control">
                                 <?php foreach ($guru as $g) : ?>
-                                    <option value="<?= $g['nama_guru']; ?>"><?= $g['nama_guru']; ?></option>
+                                    <option value="<?= $g['nuptk']; ?>"><?= $g['nama_guru']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

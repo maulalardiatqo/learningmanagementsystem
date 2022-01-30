@@ -209,8 +209,12 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'Mapel';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
-        $data['mapel'] = $this->db->get('mapel')->result_array();
         $data['guru'] = $this->db->get('guru')->result_array();
+        $this->db->select('*');
+        $this->db->from('mapel');
+        $this->db->join('guru', 'guru.nuptk = mapel.guru_mapel');
+        $data['mapel'] = $this->db->get()->result_array();
+
         $data['kelas'] = $this->db->get('kelas')->result_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -328,6 +332,7 @@ class Admin extends CI_Controller
         if ($this->form_validation->run()) {
             $this->db->insert('mapel', $data);
             $this->session->set_flashdata('flash', 'Berhasil Insert');
+            $this->session->set_flashdata('flashtype', 'success');
         } else {
             $this->session->set_flashdata('flash', 'Gagal Menyimpan, Periksa Kembali');
             $this->session->set_flashdata('flashtype', 'info');
