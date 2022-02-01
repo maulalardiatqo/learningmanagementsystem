@@ -3,6 +3,7 @@
         <b style="color: aquamarine;">Daftar kelas ajar</b>
     </div>
 </div>
+<div id="flash-data" data-typealert="<?= $this->session->flashData('flashtype'); ?>" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
 <div class="main">
     <div class="d-flex justify-content-center">
         <div class="row">

@@ -107,11 +107,14 @@
                         </select>
                     </div>
 
+
                     <div class="form-group">
                         <label for="maple">Mapel</label>
                         <select class="form-control" id="mapel" name="mapel">
+
+                            <option value="default">-Pilih Materi-</option>
                             <?php foreach ($mapel as $m) : ?>
-                                <option value="<?= $m['id_mapel']; ?>"><?= $m['nama_mapel']; ?></option>
+                                <option value="<?= $m['id_mapel']; ?>" class="<?= $m['guru_mapel'] ?> list-materi" style=""><?= $m['nama_mapel']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -143,3 +146,20 @@
         </div>
     </div>
 </div>
+<script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>
+<script>
+    function getData(URL) {
+        return $.get(URL);
+    }
+    $('#guru').on('change', async function() {
+        const val = $('#guru').val()
+        $('#mapel').val('default')
+        $('.list-materi').addClass('d-none')
+        $('.list-materi').map((list, index) => {
+            if (index.classList.contains(val)) {
+                index.classList.remove('d-none')
+            }
+        })
+
+    });
+</script>
