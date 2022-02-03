@@ -7,6 +7,7 @@ $user = $this->db->get_where('guru', ['nuptk' => $this->session->userdata['usern
 ?>
 <div class="d-flex justify-content-center mb-3">
     <a href="<?= base_url('guru/kirimMateri/' . $id_kelas) ?>" type="button" class="btn btn-primary">Upload Materi</a>
+
 </div>
 
 <?php if (count($materi) == 0) { ?>
@@ -37,7 +38,9 @@ $user = $this->db->get_where('guru', ['nuptk' => $this->session->userdata['usern
 
                     </div>
                     <?php $comment = $this->db->get_where('materi_comment', ['id_materi' => $m['id_materi']])->num_rows(); ?>
-                    <div class="card-footer text-xs text-dark h-2 mb-0">Komentar : <?= $comment ?> </div>
+                    <div class="card-footer d-flex justify-content-between text-xs text-dark h-2 mb-0">Komentar : <?= $comment ?>
+                        <button class="btn mb-0" style="background-color: sandybrown; color:seashell;">Beri tugas</button>
+                    </div>
                 </div>
             </div>
         <?php endforeach; ?>

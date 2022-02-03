@@ -1,11 +1,16 @@
-<div class="container">
+<div class="container mt-3">
     <div id="flash-data" data-typealert="<?= $this->session->flashData('flashtype'); ?>" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
     <?php foreach ($materi as $m) : ?>
+
         <div class="card mb-2">
             <div class="card-header d-flex justify-content-between">
-                <div class="text-md" style="color: darkcyan;"><b> <?= $m['nama_mapel'] ?></b>
+                <div class="text-md d-flex" style="color: darkcyan;">
+                    <b> <?= $m['nama_mapel'] ?> |</b>
+                    <p style="color: lightseagreen;"> | <?= $m['nama_guru'] ?></p>
                 </div>
-                <div>
+                <div class="">
+                    <i class="fas fa-list-alt"></i>
+                    <i class="fas fa-users"></i>
                     <i class="fas fa-folder"></i>
                 </div>
 
@@ -13,15 +18,20 @@
             <div class="card-body">
                 <h6 class="card-title text-center"><b><?= $m['judul_materi'] ?></b></h6>
                 <p class="card-text"><?= $m['isi_materi'] ?></p>
-                <button onclick="scrolldown();" class="btn btn-dark btn-sm text-white">Tulis Komentar</button>
+                <button onclick="scrolldown();" class="btn btn-dark btn-sm text-white">Beri Komentar</button>
             </div>
         </div>
         <div class="card">
             <div class="d-flex justify-content-around text-xs">
-                <a href="" class="btn bg-transparent"><i class="fas fa-list-alt"></i> Beri Tugas </a>
+                <?php $tugas = $this->db->get_where('tugas', ['id_materi' => $m['id_materi']])->num_rows();
+
+                ?>
+
+                <a href="" class="btn bg-transparent"><i class="fas fa-list-alt"></i> Tugas <?php if ($tugas) { ?> <span class="badge badge-danger badge-counter"><?= $tugas ?></span><?php } ?></a>
 
                 <a href="" class="btn bg-transparent"><i class="fas fa-users"></i> Anggota</a>
-                <a href="" class="btn bg-transparent"><i class="fas fa-folder"></i> File Materi</a>
+                <a href="" class="btn bg-transparent"><i class="fas fa-folder"></i> File Materi
+                    <?php if ($m['upload_file']) { ?> <span class="badge badge-danger badge-counter"></span> <?php } ?></a>
             </div>
         </div>
     <?php endforeach ?>
@@ -35,7 +45,7 @@
         <?php foreach ($comment as $m) : ?>
             <div class="card mb-2">
                 <div class="header d-flex content-between" style="height: 20px; background-color:gainsboro; color:maroon; font-size:small;">
-                    <p class="ml-2 mt-0"><small><?= $m['nama'] ?> mengomentari</small></p>
+                    <p class="ml-2 mt-0" style="color:green;"><small><b><?= $m['nama'] ?></b></small></p>
                     <p class="ml-2 mt-0"><small>pada-<?= $m['date_create'] ?></small></p>
                 </div>
                 <div class="card-body">

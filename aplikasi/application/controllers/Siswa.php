@@ -16,6 +16,8 @@ class Siswa extends CI_Controller
     {
         $data['judul'] = 'dashboard';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $siswa = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
+        $data['materi'] = $this->db->get_where('materi', ['kelas_id' => $siswa['kelas']])->num_rows();
         $this->load->view('templatesSiswa/topbar_siswa', $data);
         $this->load->view('templatesSiswa/header_siswa', $data);
         $this->load->view('siswa/index', $data);
@@ -48,14 +50,36 @@ class Siswa extends CI_Controller
     public function pelajaran($id_mapel)
     {
         $data['judul'] = 'Materi Pelajaran';
-        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['id_mapel'] = $id_mapel;
         $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
-        $data['mapel'] = $this->db->get_where('mapel', ['kelas_mapel' => $data['siswa']['kelas']])->result_array();
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['materi'] = $this->db->get_where('materi', ['materi_guru' => $data['user']['username'], 'kelas_id' => $data['siswa']['kelas']])->result_array();
         $data['materi'] = $this->db->get_where('materi', ['id_mapel' => $id_mapel])->result_array();
 
         // $data['mapel'] = $this->db->get('mapel')->result_array();
         $this->load->view('templatesSiswa/topbar_siswa', $data);
-        $this->load->view('siswa/pelajaran', $data, $id_mapel);
+        $this->load->view('siswa/pelajaran', $data);
+        $this->load->view('templatesSiswa/footer_siswa');
+    }
+    public function materiDetail($id_materi)
+    {
+        $data['id_materi'] = $id_materi;
+        $data['judul'] = 'Detail Materi';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $this->db->select('*');
+        $this->db->from('materi');
+        $this->db->join('mapel', 'mapel.id_mapel = materi.id_mapel', 'INNER');
+        $this->db->join('guru', 'guru.nuptk = materi.materi_guru', 'INNER');
+        $this->db->where('materi.id_materi', $data['id_materi']);
+        $data['materi'] = $this->db->get()->result_array();
+        $this->db->select('*');
+        $this->db->from('materi_comment');
+        $this->db->join('user', 'user.username = materi_comment.who_comment', 'INNER');
+        $this->db->join('materi', 'materi.id_materi = materi_comment.id_materi', 'INNER');
+        $this->db->where('materi.id_materi', $data['id_materi']);
+        $data['comment'] = $this->db->get()->result_array();
+        $this->load->view('templatesSiswa/topbar_siswa', $data);
+        $this->load->view('siswa/materiDetail', $data);
         $this->load->view('templatesSiswa/footer_siswa');
     }
     public function tugas()

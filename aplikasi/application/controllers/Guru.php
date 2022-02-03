@@ -142,6 +142,25 @@ class Guru extends CI_Controller
         $this->load->view('templates/footer_nav_guru');
         $this->load->view('templates/footer_guru');
     }
+    public function komentar()
+    {
+        $this->form_validation->set_rules('comment', 'Comment', 'required');
+        $data = [
+            'id_kelas' => $this->input->post('id_kelas'),
+            'id_materi' => $this->input->post('id_materi'),
+            'who_comment' => $this->session->userdata['username'],
+            'comment' => $this->input->post('comment')
+        ];
+        if ($this->form_validation->run()) {
+            $this->db->insert('materi_comment', $data);
+            $this->session->set_flashdata('flash', 'Komentar terkirim');
+            $this->session->set_flashdata('flashtype', 'success');
+        } else {
+            $this->session->set_flashdata('flash', 'Gagal Menyimpan, Periksa Kembali');
+            $this->session->set_flashdata('flashtype', 'info');
+        }
+        redirect('guru/materiDetail/' . $data['id_materi']);
+    }
     public function tugas()
     {
         $data['judul'] = 'Guru';

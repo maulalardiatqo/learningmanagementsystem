@@ -12,7 +12,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Pengumuman</div>
+                                Materi</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
                         </div>
                         <div class="col-auto">
@@ -30,7 +30,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Materi</div>
+                                Tugas</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">7</div>
                         </div>
                         <div class="col-auto">
@@ -47,7 +47,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Tugas</div>
+                                Ulangan</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">7</div>
                         </div>
                         <div class="col-auto">

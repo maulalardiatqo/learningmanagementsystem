@@ -13,7 +13,7 @@
     </a>
     <a href="<?= base_url('siswa/tugas') ?>" class="nav__link">
         <i class="material-icons nav__icon">edit_note</i>
-        <span class="nav__text">Tugas</span>
+        <span class="nav__text">Ulangan</span>
     </a>
     <a href="<?= base_url('siswa/absen') ?>" class="nav__link">
         <i class="material-icons nav__icon">description</i>
