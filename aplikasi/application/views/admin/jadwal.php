@@ -1,4 +1,7 @@
 <div class="container-fluid">
+    <div class="col">
+        <h6>Admin / Jadwal</h6>
+    </div>
     <div class="row">
         <div class="col text-center">
             <h3>Jadwal Mengajar</h3>
@@ -7,6 +10,7 @@
 </div>
 <div id="flash-data" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
 <div class="container mt-3 mb-3">
+
     <div class="row">
         <div class="col">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahData"><i class="fas fa-plus"></i> Atur jadwal Mengajar</button>
@@ -112,7 +116,7 @@
                         <label for="maple">Mapel</label>
                         <select class="form-control" id="mapel" name="mapel">
 
-                            <option value="default">-Pilih Materi-</option>
+                            <option value="default">-Pilih Pelajaran-</option>
                             <?php foreach ($mapel as $m) : ?>
                                 <option value="<?= $m['id_mapel']; ?>" class="<?= $m['guru_mapel'] ?> list-materi" style=""><?= $m['nama_mapel']; ?></option>
                             <?php endforeach; ?>

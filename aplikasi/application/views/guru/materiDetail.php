@@ -47,7 +47,7 @@
 
     <form action="<?= base_url('guru/komentar') ?>" method="POST">
         <div class="input-group mb-3">
-            <?php foreach ($comment as $c) : ?>
+            <?php foreach ($materi as $c) : ?>
                 <input type="hidden" value="<?= $c['id_materi'] ?>" name="id_materi">
                 <input type="hidden" value="<?= $c['kelas_id'] ?>" name="id_kelas">
 

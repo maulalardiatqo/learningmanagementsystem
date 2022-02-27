@@ -1,4 +1,7 @@
 <div class="container-fluid mt-3 mb-3">
+    <div class="col">
+        <h6>Admin / Siswa</h6>
+    </div>
 
     <div id="flash-data" data-typealert="<?= $this->session->flashData('flashtype'); ?>" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
     <div class="row">

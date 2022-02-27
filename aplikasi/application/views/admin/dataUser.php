@@ -1,4 +1,7 @@
 <div class="container-fluid mt-3 mb-3">
+    <div class="col">
+        <h6>Admin / Data User</h6>
+    </div>
     <div class="row">
         <div class="col text-center">
             <h3>Data User</h3>
@@ -6,13 +9,6 @@
     </div>
 </div>
 
-<div class="container mb-3">
-    <div class="row">
-        <div class="col">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahData"><i class="fas fa-plus"></i> Tambah Data User</button>
-        </div>
-    </div>
-</div>
 <div class="container">
     <div class="row">
         <div class="col" style="overflow-x: auto;">

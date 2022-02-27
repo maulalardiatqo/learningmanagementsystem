@@ -13,7 +13,7 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <img src="<?= base_url('assets/'); ?>img/kemenag.png" alt="" width="100px"><br><br>
+                                    <img src="<?= base_url('assets/'); ?>img/logo.png" alt="" width="100px"><br><br>
                                     <h1 class="h4 text-white-900 mb-4">SMK AL AMIRIYAH</h1>
                                 </div>
                                 <?= $this->session->flashdata('message'); ?>

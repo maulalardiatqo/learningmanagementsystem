@@ -5,8 +5,8 @@
         <div class="card mb-2">
             <div class="card-header d-flex justify-content-between">
                 <div class="text-md d-flex" style="color: darkcyan;">
-                    <b> <?= $m['nama_mapel'] ?> |</b>
-                    <p style="color: lightseagreen;"> | <?= $m['nama_guru'] ?></p>
+                    <small><b> <?= $m['nama_mapel'] ?> |</b></small>
+                    <small style="color: lightseagreen;"> | <?= $m['nama_guru'] ?></small>
                 </div>
                 <div class="">
                     <i class="fas fa-list-alt"></i>
@@ -55,9 +55,9 @@
         <?php endforeach; ?>
     <?php } ?>
 
-    <form action="<?= base_url('guru/komentar') ?>" method="POST">
+    <form action="<?= base_url('siswa/komentar') ?>" method="POST">
         <div class="input-group mb-3">
-            <?php foreach ($comment as $c) : ?>
+            <?php foreach ($materi as $c) : ?>
                 <input type="hidden" value="<?= $c['id_materi'] ?>" name="id_materi">
                 <input type="hidden" value="<?= $c['kelas_id'] ?>" name="id_kelas">
 

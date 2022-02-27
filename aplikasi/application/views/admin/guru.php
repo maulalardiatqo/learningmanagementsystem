@@ -1,4 +1,7 @@
 <div class="container-fluid">
+  <div class="col">
+    <h6>Admin / Guru</h6>
+  </div>
 
   <div id="flash-data" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
   <div class="row">

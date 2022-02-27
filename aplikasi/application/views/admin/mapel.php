@@ -1,5 +1,8 @@
 <div class="container-fluid">
     <div id="flash-data" data-typealert="<?= $this->session->flashData('flashtype'); ?>" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
+    <div class="col">
+        <h6>Admin / Mata Pelajaran</h6>
+    </div>
     <div class="row">
         <div class="col text-center">
             <h3>Mata Pelajaran</h3>
@@ -38,7 +41,7 @@
                         <tr>
                             <td><?= $i; ?></td>
                             <td><?= $u['nama_mapel']; ?></td>
-                            <td><?= $u['kelas_mapel']; ?></td>
+                            <td><?= $u['tingkat'] . ' ' . $u['kelas_prodi'] . ' ' . $u['nama_kelas']; ?></td>
                             <td><?= $u['status_mapel']; ?></td>
                             <td><?= $u['nama_guru']; ?></td>
                             <td><?= $u['jp_mapel']; ?></td>

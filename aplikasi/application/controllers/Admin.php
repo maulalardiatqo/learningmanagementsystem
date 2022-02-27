@@ -213,6 +213,7 @@ class Admin extends CI_Controller
         $this->db->select('*');
         $this->db->from('mapel');
         $this->db->join('guru', 'guru.nuptk = mapel.guru_mapel');
+        $this->db->join('kelas', 'kelas.id_kelas = mapel.kelas_mapel');
         $data['mapel'] = $this->db->get()->result_array();
 
         $data['kelas'] = $this->db->get('kelas')->result_array();
@@ -434,8 +435,10 @@ class Admin extends CI_Controller
     }
     public function hapusMapel($id)
     {
-        $sql = "DELETE FROM mapel WHERE id_mapel = $id";
+        $sql = "DELETE mapel, materi FROM mapel, materi WHERE mapel.id_mapel = $id AND materi.id_mapel = $id";
+
         $this->db->query($sql, [$id]);
+
 
         $this->session->set_flashdata('flash', 'Data dihapus');
         $this->session->set_flashdata('flashtype', 'success');
