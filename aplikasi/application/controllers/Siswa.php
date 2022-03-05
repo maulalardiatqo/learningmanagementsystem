@@ -16,6 +16,7 @@ class Siswa extends CI_Controller
     {
         $data['judul'] = 'dashboard';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+
         $siswa = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
         $data['materi'] = $this->db->get_where('materi', ['kelas_id' => $siswa['kelas']])->num_rows();
         $this->load->view('templatesSiswa/topbar_siswa', $data);

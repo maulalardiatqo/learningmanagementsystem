@@ -1,7 +1,7 @@
 <div class="container mt-3 mb-3">
     <div class="row">
         <div class="col text-center">
-            <h3>Jadwal Mata Pelajaran</h3>
+            <h6>Jadwal Mata Pelajaran</h6>
         </div>
     </div>
 </div>
@@ -9,11 +9,15 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <?php foreach ($jadwal as $j) : ?>
+            <?php
+            $day = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+
+            foreach ($day as $j) : ?>
+
 
                 <div class="card mt-3">
                     <div class="card-header bg-success">
-                        <h6 style="color: aliceblue;"> <b><?= $j['hari']; ?></b> </h6>
+                        <h6 style="color: aliceblue;"> <b><?= $j; ?></b> </h6>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-sm">
@@ -28,7 +32,7 @@
                             <tbody>
                                 <?php $i = 1; ?>
                                 <?php foreach ($jadwal as $jd) : ?>
-                                    <?php if ($jd['hari'] == $j['hari']) { ?>
+                                    <?php if ($jd['hari'] == $j) { ?>
                                         <tr>
                                             <th scope="row"><?= $i; ?></th>
                                             <td><?= $jd['nama_mapel'] ?></td>
