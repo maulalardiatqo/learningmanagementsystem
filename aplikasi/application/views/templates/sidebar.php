@@ -3,7 +3,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center mt-2" href="index.html">
-        <img src="<?= base_url('assets/') ?>img/kemenag.png" alt="" width="70px">
+        <img src="<?= base_url('assets/') ?>img/logo_smekal.png" alt="" width="70px">
 
     </a>
     <span class="sidebar-brand d-flex align-items-center justify-content-center">SMK AL AMIRIYAH</span>
