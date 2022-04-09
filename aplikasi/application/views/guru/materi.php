@@ -39,7 +39,7 @@ $user = $this->db->get_where('guru', ['nuptk' => $this->session->userdata['usern
                     </div>
                     <?php $comment = $this->db->get_where('materi_comment', ['id_materi' => $m['id_materi']])->num_rows(); ?>
                     <div class="card-footer d-flex justify-content-between text-xs text-dark h-2 mb-0">Komentar : <?= $comment ?>
-                        <button class="btn mb-0" style="background-color: sandybrown; color:seashell;">Beri tugas</button>
+                        <a href="<?= base_url('guru/tugas/' . $m['id_materi']) ?>" class="btn mb-0" style="background-color: sandybrown; color:seashell;">Beri tugas</a>
                     </div>
                 </div>
             </div>
