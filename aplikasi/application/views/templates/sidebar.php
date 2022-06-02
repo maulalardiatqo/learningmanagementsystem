@@ -20,7 +20,7 @@
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('admin/profilSekolah') ?>">
             <i class="fas fa-id-badge"></i>
-            <span>Profil Sekolah</span></a>
+            <span>Kelola Website</span></a>
     </li>
 
     <li class="nav-item">

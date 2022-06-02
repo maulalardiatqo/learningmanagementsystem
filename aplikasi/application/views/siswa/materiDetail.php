@@ -46,7 +46,7 @@
             <div class="card mb-2">
                 <div class="header d-flex content-between" style="height: 20px; background-color:gainsboro; color:maroon; font-size:small;">
                     <p class="ml-2 mt-0" style="color:green;"><small><b><?= $m['nama'] ?></b></small></p>
-                    <p class="ml-2 mt-0"><small>pada-<?= $m['date_create'] ?></small></p>
+                    <p class="ml-2 mt-0"><small>pada-<?= $m['date_create_materi'] ?></small></p>
                 </div>
                 <div class="card-body">
                     <div class="text-xs mb-0"><?= $m['comment'] ?></div>

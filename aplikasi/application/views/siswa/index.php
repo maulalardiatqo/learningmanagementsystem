@@ -13,7 +13,10 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Materi</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                            <?php
+                            $siswa = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
+                            $materi = $this->db->get_where('materi', ['kelas_id' => $siswa['kelas']])->num_rows(); ?>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $materi ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -31,7 +34,11 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Tugas</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">7</div>
+                            <?php
+                            $siswa = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
+                            $tugas = $this->db->get_where('tugas', ['id_kelas' => $siswa['kelas']])->num_rows();
+                            ?>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $tugas ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
