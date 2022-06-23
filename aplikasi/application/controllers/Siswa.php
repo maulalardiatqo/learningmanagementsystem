@@ -110,12 +110,12 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/tugas', $data);
         $this->load->view('templatesSiswa/footer_siswa');
     }
-    public function ujian()
+    public function ulangan()
     {
-        $data['judul'] = 'Ujian';
+        $data['judul'] = 'Ulangan';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $this->load->view('templatesSiswa/topbar_siswa', $data);
-        $this->load->view('siswa/ujian', $data);
+        $this->load->view('siswa/ulangan', $data);
         $this->load->view('templatesSiswa/footer_siswa');
     }
     public function chat()

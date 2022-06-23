@@ -11,7 +11,7 @@
         <i class="material-icons nav__icon">menu_book</i>
         <span class="nav__text">Materi</span>
     </a>
-    <a href="<?= base_url('siswa/tugas') ?>" class="nav__link">
+    <a href="<?= base_url('siswa/ulangan') ?>" class="nav__link">
         <i class="material-icons nav__icon">edit_note</i>
         <span class="nav__text">Ulangan</span>
     </a>
@@ -26,7 +26,7 @@
 <footer class="sticky-footer" style="background-color: #343a40;">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span style="color: ghostwhite;"> &copy; Copyright <?= date('Y'); ?> Develop : <a style="text-decoration: none;" href="http://maulalardiatqo.github.io">Maulal Ardi Atqo</a></span>
+            <!-- <span style="color: ghostwhite;"> &copy; Copyright <?= date('Y'); ?> Develop : <a style="text-decoration: none;" href="http://maulalardiatqo.github.io">Maulal Ardi Atqo</a></span> -->
         </div>
     </div>
 </footer>

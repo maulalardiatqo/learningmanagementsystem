@@ -11,9 +11,9 @@
         <i class="material-icons nav__icon">menu_book</i>
         <span class="nav__text">Materi</span>
     </a>
-    <a href="<?= base_url('guru/tugas') ?>" class="nav__link">
+    <a href="<?= base_url('guru/ulangan') ?>" class="nav__link">
         <i class="material-icons nav__icon">edit_note</i>
-        <span class="nav__text">Tugas</span>
+        <span class="nav__text">Ulangan</span>
     </a>
     <a href="<?= base_url('guru/ujian') ?>" class="nav__link">
         <i class="material-icons nav__icon">description</i>

@@ -36,7 +36,7 @@
                                 Tugas</div>
                             <?php
                             $siswa = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
-                            $tugas = $this->db->get_where('tugas', ['id_kelas' => $siswa['kelas']])->num_rows();
+                            $tugas = $this->db->get_where('tugas', ['kelas_id' => $siswa['kelas']])->num_rows();
                             ?>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $tugas ?></div>
                         </div>

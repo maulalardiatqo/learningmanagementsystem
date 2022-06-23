@@ -161,13 +161,13 @@ class Guru extends CI_Controller
         }
         redirect('guru/materiDetail/' . $data['id_materi']);
     }
-    public function tugas($id_materi)
+    public function ulangan()
     {
-        $data['id_materi'] = $id_materi;
-        $data['judul'] = 'Guru';
+        $data['judul'] = 'Ulangan';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        
         $this->load->view('templates/header_guru', $data);
-        $this->load->view('guru/tugas', $data);
+        $this->load->view('guru/ulangan', $data);
         $this->load->view('templates/footer_nav_guru');
         $this->load->view('templates/footer_guru');
     }

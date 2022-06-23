@@ -27,7 +27,7 @@
 
                 ?>
 
-                <a href="" class="btn bg-transparent"><i class="fas fa-list-alt"></i> Tugas <?php if ($tugas) { ?> <span class="badge badge-danger badge-counter"><?= $tugas ?></span><?php } ?></a>
+                <a href="<?= base_url('siswa/tugas')?>" class="btn bg-transparent"><i class="fas fa-list-alt"></i> Tugas <?php if ($tugas) { ?> <span class="badge badge-danger badge-counter"><?= $tugas ?></span><?php } ?></a>
 
                 <a href="" class="btn bg-transparent"><i class="fas fa-users"></i> Anggota</a>
                 <a href="" class="btn bg-transparent"><i class="fas fa-folder"></i> File Materi
