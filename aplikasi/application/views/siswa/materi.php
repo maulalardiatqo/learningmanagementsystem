@@ -1,7 +1,10 @@
-<div class="container-fluid mt-3">
-    <div class="text-center">
-        <h4>Daftar Mata Pelajaran</h4>
+<div class="head" style="color:aliceblue; background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,111,121,1) 35%, rgba(0,212,255,1) 100%); padding-bottom:8px; padding-top:8px;">
+    <div class="container" style="padding-left:10px; font-size: 14px;">
+        <small style="color:aliceblue;"><b>Daftar Mata Pelajaran</b></small>
     </div>
+</div>
+
+<div class="container-fluid mt-3" style="font-size: 14px;">
 
     <div class="col-sm-12 col-md-6">
         <label for="search">Cari materi <input type="text" class="form-control"></label>

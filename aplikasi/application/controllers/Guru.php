@@ -165,9 +165,28 @@ class Guru extends CI_Controller
     {
         $data['judul'] = 'Ulangan';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
-        
+        $data['mapel'] = $this->db->get_where('mapel', ['guru_mapel' => $this->session->userdata['username']])->result_array();
+        $this->db->select('*');
+        $this->db->from('parent_soal');
+        $this->db->join('mapel', 'mapel.id_mapel = parent_soal.mapel_id_parent');
+        $data['ulangan'] = $this->db->get()->result_array();
         $this->load->view('templates/header_guru', $data);
         $this->load->view('guru/ulangan', $data);
+        $this->load->view('templates/footer_nav_guru');
+        $this->load->view('templates/footer_guru');
+    }
+    public function buatSoal($id_parent)
+    {
+        $data['id_parent'] = $id_parent;
+        $data['judul'] = 'Buat Soal';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $this->db->select('*');
+        $this->db->from('parent_soal');
+        $this->db->join('mapel', 'mapel.id_mapel = parent_soal.mapel_id_parent');
+        $this->db->where('parent_soal.id_parent', $id_parent);
+        $data['parent'] = $this->db->get()->result_array();
+        $this->load->view('templates/header_guru', $data);
+        $this->load->view('guru/buatSoal', $data);
         $this->load->view('templates/footer_nav_guru');
         $this->load->view('templates/footer_guru');
     }

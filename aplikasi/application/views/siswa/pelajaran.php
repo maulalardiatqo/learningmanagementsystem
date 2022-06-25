@@ -1,6 +1,11 @@
-<div id="flash-data" data-typealert="<?= $this->session->flashData('flashtype'); ?>" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
+<div class="head mb-3" style="color:aliceblue; background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,111,121,1) 35%, rgba(0,212,255,1) 100%); padding-bottom:8px; padding-top:8px;">
+    <div class="container" style="padding-left:10px; font-size: 14px;">
+        <small style="color:aliceblue;"><b>Materi Pelajaran</b></small>
+    </div>
+</div>
 
-<div class="d-flex justify-content-center mb-3">Materi Pelajaran</div>
+
+<div id="flash-data" data-typealert="<?= $this->session->flashData('flashtype'); ?>" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
 
 <?php if (count($materi) == 0) { ?>
     <div class="container">

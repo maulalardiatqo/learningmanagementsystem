@@ -1,15 +1,12 @@
-<div class="container-fluid mt-3 mb-3">
-    <div class="row">
-        <div class="col text-center">
-            <h3>Jadwal Mengajar</h3>
-        </div>
+<div class="head mb-2" style="color:aliceblue; background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,111,121,1) 35%, rgba(0,212,255,1) 100%); padding-bottom:8px; padding-top:8px;">
+    <div class="container" style="padding-left:10px; font-size: 14px;">
+        <small style="color:aliceblue;"><b>Jadwal Mengajar</b></small>
     </div>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col" style="overflow-x: auto;">
-            <table class="table table-bordered table-sm" id="dataTable" width="100%" collapse="0">
+            <table class="table table-bordered table-sm" id="dataTable" width="100%" collapse="0" style="font-size: 12; size: 12px;">
 
                 <thead>
                     <tr>
