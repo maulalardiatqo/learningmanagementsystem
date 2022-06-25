@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2022 at 06:59 PM
+-- Generation Time: Jun 25, 2022 at 07:30 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -184,7 +184,7 @@ CREATE TABLE `materi` (
   `judul_materi` varchar(100) NOT NULL,
   `isi_materi` longtext NOT NULL,
   `upload_file` varchar(300) NOT NULL,
-  `date_create` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date_create` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -192,7 +192,7 @@ CREATE TABLE `materi` (
 --
 
 INSERT INTO `materi` (`id_materi`, `id_mapel`, `materi_guru`, `kelas_id`, `judul_materi`, `isi_materi`, `upload_file`, `date_create`) VALUES
-(18, 13, '54321', 18, 'Pengenalan Desain Grafis', '<p>asdfasdfa</p>\r\n', '', '2022-02-12 10:23:21');
+(18, 13, '54321', 18, 'Pengenalan Desain Grafis', '<p>asdfasdfa</p>\r\n', '', '2022-02-12 17:23:21');
 
 -- --------------------------------------------------------
 
@@ -206,28 +206,37 @@ CREATE TABLE `materi_comment` (
   `id_materi` int(11) NOT NULL,
   `who_comment` int(11) NOT NULL,
   `comment` text NOT NULL,
-  `date_create` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date_create_materi` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `materi_comment`
 --
 
-INSERT INTO `materi_comment` (`id_comment`, `id_kelas`, `id_materi`, `who_comment`, `comment`, `date_create`) VALUES
-(1, 18, 11, 11111, 'hai', '2022-02-01 10:45:16'),
-(2, 18, 11, 11111, 'saya mau tanya', '2022-02-01 10:45:16'),
-(3, 18, 11, 54321, 'silahkan mas', '2022-02-01 12:17:11'),
-(4, 18, 11, 54321, 'ada yang bisa dibantu?', '2022-02-01 12:20:18'),
-(5, 18, 11, 54321, 'Silahkan ditanyakan', '2022-02-01 12:21:43'),
-(6, 18, 11, 54321, 'nanti kita bantu jawab', '2022-02-01 12:22:30'),
-(7, 18, 11, 54321, 'Sudahkah dikerjakan?', '2022-02-01 12:23:19'),
-(8, 18, 11, 11111, 'yang itu gimana ya pak', '2022-02-01 12:48:42'),
-(9, 18, 11, 54321, 'gimana', '2022-02-08 14:07:39'),
-(10, 18, 11, 11111, 'asdfa', '2022-02-08 14:22:32'),
-(11, 18, 11, 54321, 'asdfa', '2022-02-08 14:39:07'),
-(12, 18, 17, 54321, 'asas', '2022-02-08 15:14:23'),
-(13, 18, 17, 11111, 'assadasds', '2022-02-08 15:15:38'),
-(14, 18, 18, 11111, 'pa saya mau tanya', '2022-02-27 04:47:14');
+INSERT INTO `materi_comment` (`id_comment`, `id_kelas`, `id_materi`, `who_comment`, `comment`, `date_create_materi`) VALUES
+(17, 18, 18, 11111, 'nanti kita bantu jawab', '2022-06-21 12:01:55'),
+(18, 18, 18, 11111, 'Halo pak', '2022-06-25 17:23:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_soal`
+--
+
+CREATE TABLE `parent_soal` (
+  `id_parent` int(11) NOT NULL,
+  `judul_ulangan` varchar(150) NOT NULL,
+  `mapel_id_parent` int(11) NOT NULL,
+  `created_by` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `parent_soal`
+--
+
+INSERT INTO `parent_soal` (`id_parent`, `judul_ulangan`, `mapel_id_parent`, `created_by`) VALUES
+(1, 'PAT', 13, '54321'),
+(2, 'PAT', 14, '54321');
 
 -- --------------------------------------------------------
 
@@ -281,6 +290,25 @@ INSERT INTO `siswa` (`id_siswa`, `nis`, `nik`, `nama_siswa`, `alamat`, `gender`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `soal_ulangan`
+--
+
+CREATE TABLE `soal_ulangan` (
+  `id_soal` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `judul_ulangan` varchar(150) NOT NULL,
+  `pertanyaan` varchar(600) NOT NULL,
+  `jawaban_a` varchar(250) NOT NULL,
+  `jawaban_b` varchar(250) NOT NULL,
+  `jawaban_c` varchar(250) NOT NULL,
+  `jawaban_d` varchar(250) NOT NULL,
+  `jawaban_e` varchar(250) NOT NULL,
+  `jawaban` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tugas`
 --
 
@@ -289,7 +317,8 @@ CREATE TABLE `tugas` (
   `id_mapel` int(11) NOT NULL,
   `id_siswa` int(11) NOT NULL,
   `id_materi` int(11) NOT NULL,
-  `isi_tugas` text NOT NULL
+  `isi_tugas` text NOT NULL,
+  `kelas_id` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -322,18 +351,6 @@ INSERT INTO `user` (`id`, `nama`, `foto`, `username`, `password`, `role_id`, `is
 (84, 'Dea sukmadinata', 'default.png', '123456', '$2y$10$3X3/xsjMkKB4l1wGRl0HheQpXb30.b.0NzhEB8vIvAewN3pFsSY0u', 2, 1, 0),
 (85, 'Sekhu', 'default.png', '66114', '$2y$10$QTXhesAcuppx2QA8MW2E0ut3FFDqxEHDEB9q.rSO9HBm3wR.jZhHS', 2, 1, 0),
 (86, 'Ade', 'default.png', '44788', '$2y$10$0aoU.sY9It5wTYr3zL5cdeRv4uZi2b07tYUXyDJhBc1dseAfQ.raq', 2, 1, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_access_menu`
---
-
-CREATE TABLE `user_access_menu` (
-  `id` int(11) NOT NULL,
-  `role_id` int(128) NOT NULL,
-  `menu_id` int(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -376,21 +393,6 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 (3, 'Operator'),
 (4, 'Guru'),
 (5, 'siswa');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_sub_menu`
---
-
-CREATE TABLE `user_sub_menu` (
-  `id` int(11) NOT NULL,
-  `menu_id` int(10) NOT NULL,
-  `title` varchar(128) NOT NULL,
-  `url` varchar(128) NOT NULL,
-  `icon` varchar(128) NOT NULL,
-  `is_active` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -445,6 +447,12 @@ ALTER TABLE `materi_comment`
   ADD PRIMARY KEY (`id_comment`);
 
 --
+-- Indexes for table `parent_soal`
+--
+ALTER TABLE `parent_soal`
+  ADD PRIMARY KEY (`id_parent`);
+
+--
 -- Indexes for table `prodi`
 --
 ALTER TABLE `prodi`
@@ -456,6 +464,12 @@ ALTER TABLE `prodi`
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`id_siswa`),
   ADD UNIQUE KEY `nis` (`nis`);
+
+--
+-- Indexes for table `soal_ulangan`
+--
+ALTER TABLE `soal_ulangan`
+  ADD PRIMARY KEY (`id_soal`);
 
 --
 -- Indexes for table `tugas`
@@ -471,12 +485,6 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indexes for table `user_access_menu`
---
-ALTER TABLE `user_access_menu`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `user_menu`
 --
 ALTER TABLE `user_menu`
@@ -486,12 +494,6 @@ ALTER TABLE `user_menu`
 -- Indexes for table `user_role`
 --
 ALTER TABLE `user_role`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_sub_menu`
---
-ALTER TABLE `user_sub_menu`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -544,7 +546,13 @@ ALTER TABLE `materi`
 -- AUTO_INCREMENT for table `materi_comment`
 --
 ALTER TABLE `materi_comment`
-  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `parent_soal`
+--
+ALTER TABLE `parent_soal`
+  MODIFY `id_parent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `prodi`
@@ -559,6 +567,12 @@ ALTER TABLE `siswa`
   MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
+-- AUTO_INCREMENT for table `soal_ulangan`
+--
+ALTER TABLE `soal_ulangan`
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tugas`
 --
 ALTER TABLE `tugas`
@@ -571,12 +585,6 @@ ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
--- AUTO_INCREMENT for table `user_access_menu`
---
-ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
@@ -587,12 +595,6 @@ ALTER TABLE `user_menu`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `user_sub_menu`
---
-ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

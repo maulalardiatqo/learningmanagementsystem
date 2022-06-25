@@ -24,6 +24,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/skripsi_lms/aplikasi/';
+// conneksi hp
+// $config['base_url'] = 'http://192.168.1.19/skripsi_lms/aplikasi/';
 
 // $config['base_url'] = 'http://localhost/learningmanagementsystem/aplikasi/';
 
