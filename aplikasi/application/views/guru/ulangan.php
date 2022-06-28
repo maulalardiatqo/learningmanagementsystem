@@ -1,3 +1,4 @@
+<div id="flash-data" data-typealert="<?= $this->session->flashData('flashtype'); ?>" data-flashdata="<?= $this->session->flashData('flash'); ?>"></div>
 <div class="head" style="color:aliceblue; background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,111,121,1) 35%, rgba(0,212,255,1) 100%); padding-bottom:8px; padding-top:8px;">
     <div class="container" style="padding-left:10px; font-size: 14px;">
         <small style="color:aliceblue;"><b>Ulangan</b></small>
@@ -16,7 +17,7 @@
         <?php $no = 1;
         foreach ($ulangan as $ul) : ?>
             <div class="soal_ulangan">
-                <a href="<?= base_url() ?>/guru/buatSoal/<?= $ul['id_parent'] ?>" style="color:aquamarine;"> <small><?= $no ?>. <?= $ul['judul_ulangan'] ?> <b>(<?= $ul['nama_mapel'] ?>)</b></small></a>
+                <a href="<?= base_url() ?>/guru/buatSoal/<?= $ul['id_parent'] ?>" style="color:aquamarine;"> <small><?= $no ?>. <?= $ul['type_ulangan'] ?> <?= $ul['judul_ulangan'] ?> <b>(<?= $ul['nama_mapel'] ?>)</b></small></a>
                 <?php $no++; ?>
             </div>
         <?php endforeach ?>
@@ -32,19 +33,36 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" method="POST">
+                <form action="<?= base_url('guru/buatParrent') ?>" method="POST">
                     <div class="input-group-sm mb-3">
-                        <label for="exampleInputEmail1" class="form-label"><small>Judul Ulangan</small></label>
-                        <input type="drop" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="type_ulangan" class="form-label"><small>Tipe Ulangan</small></label>
+                        <select name="type_ulangan" id="type_ulangan" class="form-control">
+                            <option value="PAT">PAT</option>
+                            <option value="PAS">PAS</option>
+                            <option value="UH">UH</option>
+                        </select>
                     </div>
                     <div class="input-group-sm mb-3">
-                        <label for="exampleInputPassword1" class="form-label"><small>Mapel</small></label>
-                        <select class="form-control form-select-sm" aria-label=".form-select-sm example">
+                        <label for="judul_ulangan" class="form-label"><small>Judul Ulangan</small></label>
+                        <input type="text" class="form-control" id="judul_ulangan" name="judul_ulangan">
+                    </div>
+                    <div class="input-group-sm mb-3">
+                        <label for="mapel_id_parent" class="form-label"><small>Mapel</small></label>
+                        <select class="form-control form-select-sm" aria-label=".form-select-sm example" id="mapel_id_parent" name="mapel_id_parent">
                             <?php foreach ($mapel as $m) : ?>
                                 <option value="<?= $m['id_mapel'] ?>"><?= $m['nama_mapel'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
+                    <div class="input-group-sm mb-3">
+                        <label for="waktu_pengerjaan" class="form-label"><small>Waktu Pengerjaan</small></label>
+                        <input type="date" class="form-control" id="waktu_pengerjaan" name="waktu_pengerjaan">
+                    </div>
+                    <div class="input-group-sm mb-3">
+                        <label for="keterangan" class="form-label"><small>Keterangan</small></label>
+                        <input type="text" class="form-control" id="keterangan" name="keterangan">
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-sm">Buat</button>
                 </form>
             </div>

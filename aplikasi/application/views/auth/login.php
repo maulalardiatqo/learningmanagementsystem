@@ -36,7 +36,7 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a style="color: whitesmoke;" class="small" href="forgot-password.html">Forgot Password?</a>
+                                    <a style="color: whitesmoke;" class="small" href="<?= base_url('auth/panduan') ?>">Panduan Aplikasi</a>
                                 </div>
                                 <!-- <div class="text-center">
                                 <a style="color: whitesmoke;" class="small" href="<?= base_url('auth/registrasi') ?>">Buat Akun</a>

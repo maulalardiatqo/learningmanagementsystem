@@ -175,6 +175,29 @@ class Guru extends CI_Controller
         $this->load->view('templates/footer_nav_guru');
         $this->load->view('templates/footer_guru');
     }
+    public function buatParrent()
+    {
+        $this->form_validation->set_rules('judul_ulangan', 'Judul Ulangan', 'required');
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+
+        $data = [
+            'type_ulangan' => $this->input->post('type_ulangan'),
+            'judul_ulangan' => $this->input->post('judul_ulangan'),
+            'mapel_id_parent' => $this->input->post('mapel_id_parent'),
+            'waktu_pengerjaan' => $this->input->post('waktu_pengerjaan'),
+            'keterangan' => $this->input->post('keterangan'),
+            'created_by' => $data['user']['username']
+        ];
+        if ($this->form_validation->run()) {
+            $this->db->insert('parent_soal', $data);
+            $this->session->set_flashdata('flash', 'Berhasil Insert');
+            $this->session->set_flashdata('flashtype', 'success');
+        } else {
+            $this->session->set_flashdata('flash', 'Gagal Menyimpan, Periksa Kembali');
+            $this->session->set_flashdata('flashtype', 'info');
+        }
+        redirect('guru/ulangan');
+    }
     public function buatSoal($id_parent)
     {
         $data['id_parent'] = $id_parent;

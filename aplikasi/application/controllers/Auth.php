@@ -115,6 +115,11 @@ class Auth extends CI_Controller
             redirect('auth');
         }
     }
+    public function panduan()
+    {
+        $data['judul'] = 'Panduan';
+        $this->load->view('auth/panduan');
+    }
     public function logout()
     {
         $this->session->unset_userdata('email');

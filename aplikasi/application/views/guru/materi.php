@@ -5,7 +5,7 @@ $user = $this->db->get_where('guru', ['nuptk' => $this->session->userdata['usern
 
 
 ?>
-<div class="d-flex justify-content-center mb-3">
+<div class="d-flex justify-content-center mb-3 mt-3">
     <a href="<?= base_url('guru/kirimMateri/' . $id_kelas) ?>" type="button" class="btn btn-primary">Upload Materi</a>
 
 </div>
