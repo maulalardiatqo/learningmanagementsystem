@@ -16,8 +16,14 @@
     <div class="ulangan mt-1">
         <?php $no = 1;
         foreach ($ulangan as $ul) : ?>
-            <div class="soal_ulangan">
-                <a href="<?= base_url() ?>/guru/buatSoal/<?= $ul['id_parent'] ?>" style="color:aquamarine;"> <small><?= $no ?>. <?= $ul['type_ulangan'] ?> <?= $ul['judul_ulangan'] ?> <b>(<?= $ul['nama_mapel'] ?>)</b></small></a>
+            <div class="row">
+                <div class="soal">
+                    <a href="<?= base_url() ?>/guru/buatSoal/<?= $ul['id_parent'] ?>" style="color:aquamarine;"> <small><?= $no ?>. <?= $ul['type_ulangan'] ?> <?= $ul['judul_ulangan'] ?> <b>(<?= $ul['nama_mapel'] ?>)</b></small></a>
+                </div>
+                <div class="opsi pl-3">
+                    <a href="<?= base_url('guru/buatSOal/' . $ul['id_parent']) ?>"><i style="color:darkcyan;" class="fas fa-edit fa-2xs"></i></a>
+                    <a href="<?= base_url('guru/hapusParent/' . $ul['id_parent']) ?>" class="tombol-hapus"><i style="color:darkred" class="fas fa-trash fa-2xs"></i></a>
+                </div>
                 <?php $no++; ?>
             </div>
         <?php endforeach ?>
@@ -29,7 +35,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Buat Template Soal</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -56,7 +62,11 @@
                     </div>
                     <div class="input-group-sm mb-3">
                         <label for="waktu_pengerjaan" class="form-label"><small>Waktu Pengerjaan</small></label>
-                        <input type="date" class="form-control" id="waktu_pengerjaan" name="waktu_pengerjaan">
+                        <input type="text" class="form-control" id="waktu_pengerjaan" name="waktu_pengerjaan" placeholder="Menit">
+                    </div>
+                    <div class="input-group-sm mb-3">
+                        <label for="tanggal_pengerjaan" class="form-label"><small>Tanggal Pengerjaan</small></label>
+                        <input type="date" class="form-control" id="tanggal_pengerjaan" name="tanggal_pengerjaan">
                     </div>
                     <div class="input-group-sm mb-3">
                         <label for="keterangan" class="form-label"><small>Keterangan</small></label>

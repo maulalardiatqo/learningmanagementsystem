@@ -185,6 +185,7 @@ class Guru extends CI_Controller
             'judul_ulangan' => $this->input->post('judul_ulangan'),
             'mapel_id_parent' => $this->input->post('mapel_id_parent'),
             'waktu_pengerjaan' => $this->input->post('waktu_pengerjaan'),
+            'tanggal_pengerjaan' => $this->input->post('tanggal_pengerjaan'),
             'keterangan' => $this->input->post('keterangan'),
             'created_by' => $data['user']['username']
         ];
@@ -198,20 +199,65 @@ class Guru extends CI_Controller
         }
         redirect('guru/ulangan');
     }
+    public function tambahSoal()
+    {
+        $this->form_validation->set_rules('pertanyaan', 'Pertanyaan', 'required');
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+
+        $data = [
+            'parent_id' => $this->input->post('parent_id'),
+            'pertanyaan' => $this->input->post('pertanyaan'),
+            'jawaban_a' => $this->input->post('jawaban_a'),
+            'jawaban_b' => $this->input->post('jawaban_b'),
+            'jawaban_c' => $this->input->post('jawaban_c'),
+            'jawaban_d' => $this->input->post('jawaban_d'),
+            'jawaban_e' => $this->input->post('jawaban_e'),
+            'jawaban' => $this->input->post('jawaban'),
+        ];
+        if ($this->form_validation->run()) {
+            $this->db->insert('soal_ulangan', $data);
+            $this->session->set_flashdata('flash', 'Berhasil Insert');
+            $this->session->set_flashdata('flashtype', 'success');
+        } else {
+            $this->session->set_flashdata('flash', 'Gagal Menyimpan, Periksa Kembali');
+            $this->session->set_flashdata('flashtype', 'info');
+        }
+        redirect('guru/buatSoal/' . $this->input->post('parent_id'));
+    }
     public function buatSoal($id_parent)
     {
         $data['id_parent'] = $id_parent;
         $data['judul'] = 'Buat Soal';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['soal'] = $this->db->get_where('soal_ulangan', ['parent_id' => $id_parent])->result_array();
         $this->db->select('*');
         $this->db->from('parent_soal');
         $this->db->join('mapel', 'mapel.id_mapel = parent_soal.mapel_id_parent');
         $this->db->where('parent_soal.id_parent', $id_parent);
+
         $data['parent'] = $this->db->get()->result_array();
         $this->load->view('templates/header_guru', $data);
         $this->load->view('guru/buatSoal', $data);
         $this->load->view('templates/footer_nav_guru');
         $this->load->view('templates/footer_guru');
+    }
+    public function hapusSoal($id_soal, $parent_id)
+    {
+        $sql = "DELETE FROM soal_ulangan WHERE id_soal = $id_soal";
+        $this->db->query($sql, [$id_soal]);
+
+        $this->session->set_flashdata('flash', 'Data dihapus');
+        $this->session->set_flashdata('flashtype', 'success');
+        redirect('guru/buatSoal/' . $parent_id);
+    }
+    public function hapusParent($id_parent)
+    {
+        $sql = "DELETE p.*, s.* FROM parent_soal p, soal_ulangan s WHERE p.id_parent=$id_parent AND s.parent_id = $id_parent";
+        $this->db->query($sql, [$id_parent]);
+
+        $this->session->set_flashdata('flash', 'Data dihapus');
+        $this->session->set_flashdata('flashtype', 'success');
+        redirect('guru/ulangan');
     }
     public function ujian()
     {

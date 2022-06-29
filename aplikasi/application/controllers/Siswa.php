@@ -114,8 +114,32 @@ class Siswa extends CI_Controller
     {
         $data['judul'] = 'Ulangan';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
+        $data['mapel'] = $this->db->get_where('mapel', ['kelas_mapel' => $data['siswa']['kelas']])->result_array();
+        $this->db->select('*');
+        $this->db->from('parent_soal');
+        $this->db->join('mapel', 'mapel.id_mapel = parent_soal.mapel_id_parent');
+        $this->db->where('mapel.kelas_mapel', $data['siswa']['kelas']);
+        $data['ulangan'] = $this->db->get()->result_array();
+
         $this->load->view('templatesSiswa/topbar_siswa', $data);
         $this->load->view('siswa/ulangan', $data);
+        $this->load->view('templatesSiswa/footer_siswa');
+    }
+    public function soal()
+    {
+        $data['judul'] = 'Ulangan';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
+        $data['mapel'] = $this->db->get_where('mapel', ['kelas_mapel' => $data['siswa']['kelas']])->result_array();
+        $this->db->select('*');
+        $this->db->from('parent_soal');
+        $this->db->join('mapel', 'mapel.id_mapel = parent_soal.mapel_id_parent');
+        $this->db->where('mapel.kelas_mapel', $data['siswa']['kelas']);
+        $data['ulangan'] = $this->db->get()->result_array();
+
+        $this->load->view('templatesSiswa/topbar_siswa', $data);
+        $this->load->view('siswa/soal', $data);
         $this->load->view('templatesSiswa/footer_siswa');
     }
     public function chat()
