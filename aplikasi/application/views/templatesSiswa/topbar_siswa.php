@@ -54,8 +54,9 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-dark topbar static-top shadow" style="background-color: #212529;">
+                    <img src="<?= base_url('assets/img/logo_app.png') ?>" alt="" style="width:43px;height:45x;">
                     <!-- logo -->
-                    <div class="navbar me-auto" style="font-size: 7px; padding-left: 2px;">
+                    <div class="navbar me-auto" style="font-size: 7px; padding-left: 15px; padding-top:10px;">
                         <i class="material-icons nav__icon">schedule</i></h1><span style="color:aliceblue; font-size:8pt;" id="tenggalWaktu"></span><span>,</span><span style="color:aqua; font-size:8pt;" id="jam"></span>
                     </div>
 

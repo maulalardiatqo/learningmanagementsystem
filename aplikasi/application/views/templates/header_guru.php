@@ -44,7 +44,7 @@
 
 
                     <!-- Topbar Search -->
-
+                    <img src="<?= base_url('assets/img/logo_app.png') ?>" alt="" style="width:43px;height:45x;">
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
