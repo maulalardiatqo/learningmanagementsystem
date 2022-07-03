@@ -152,13 +152,20 @@ class Siswa extends CI_Controller
         $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
         $data['mapel'] = $this->db->get_where('mapel', ['kelas_mapel' => $data['siswa']['kelas']])->result_array();
         $mapel_id = $data['mapel'][0]['id_mapel'];
-        $this->db->select('id_soal');
+        $this->db->select('id_soal,jawaban');
         $this->db->from('soal_ulangan');
         $this->db->where('parent_id', $id_parent);
         $data['id'] = $this->db->get()->result_array();
         $jawaban = [];
+        $jawaban_benar = 0;
+        $jumlah_soal = 0;
         foreach ($data['id'] as $d) {
             $this->form_validation->set_rules('jawaban-' . $d['id_soal'], 'Jawaban', 'required');
+            if ($d['jawaban'] == $this->input->post('jawaban-' . $d['id_soal'])) {
+                $jawaban_benar++;
+            }
+            $jumlah_soal++;
+
             array_push($jawaban, [
                 'id_parent_soal' => $id_parent,
                 'soal_id' => $d['id_soal'],
@@ -167,19 +174,86 @@ class Siswa extends CI_Controller
                 'mapel_id' => $mapel_id
             ]);
         }
-        // var_dump($data['id']);
+        $nilai = 100 / $jumlah_soal * $jawaban_benar;
 
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('flash', 'Periksa Kembali!!!, Jawaban harus diisi');
             $this->session->set_flashdata('flashtype', 'danger');
             redirect('siswa/soal/' . $id_parent);
         } else {
-
+            $this->db->select('*');
+            $this->db->from('parent_soal');
+            $this->db->join('mapel', 'mapel.id_mapel = parent_soal.mapel_id_parent');
+            $this->db->where('mapel.kelas_mapel', $data['siswa']['kelas']);
+            $data['ulangan'] = $this->db->get()->result_array();
+            $this->db->insert('nilai', [
+                'nilai_judul_ulangan' => $data['ulangan'][0]['judul_ulangan'],
+                'mapel_nilai' => $data['ulangan'][0]['mapel_id_parent'],
+                'nilai_nama_siswa' => $this->session->userdata['username'],
+                'nilai' => $nilai
+            ]);
             $this->db->insert_batch('jawaban_soal', $jawaban);
             $this->session->set_flashdata('flash', 'Jawaban Terkirim');
             $this->session->set_flashdata('flashtype', 'success');
             redirect('siswa/ulangan');
         }
+    }
+    public function nilai()
+    {
+        $data['judul'] = 'Daftar Nilai';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $this->db->select('*');
+        $this->db->from('nilai');
+        $this->db->join('mapel', 'mapel.id_mapel = nilai.mapel_nilai');
+        $format = [];
+        $datanilai = $this->db->get()->result_array();
+        foreach ($datanilai as $dnilai) {
+            $mapel = $dnilai['nama_mapel'];
+            $mapelID = $dnilai['mapel_nilai'];
+            if (count($format) == 0) {
+                array_push($format, [
+                    "id_mapel" => $mapelID,
+                    "nama_mapel" => $mapel,
+                    "data" => [
+                        [
+                            "judul_ulangan" => $dnilai['nilai_judul_ulangan'],
+                            "nilai" => $dnilai['nilai'],
+                        ]
+                    ]
+                ]);
+            } else {
+                $count = 0;
+                $index = 0;
+                for ($i = 0; $i < count($format); $i++) {
+                    if ($mapelID == $format[$i]['id_mapel']) {
+                        $count++;
+                        $index = $i;
+                    }
+                }
+
+                if ($count > 0) {
+                    array_push($format[$index]['data'], [
+                        "judul_ulangan" => $dnilai['nilai_judul_ulangan'],
+                        "nilai" => $dnilai['nilai'],
+                    ]);
+                } else {
+                    array_push($format, [
+                        "id_mapel" => $mapelID,
+                        "nama_mapel" => $mapel,
+                        "data" => [
+                            [
+                                "judul_ulangan" => $dnilai['nilai_judul_ulangan'],
+                                "nilai" => $dnilai['nilai'],
+                            ]
+                        ]
+                    ]);
+                }
+            }
+        }
+        $data['nilai'] = $format;
+        $this->load->view('templatesSiswa/topbar_siswa', $data);
+        $this->load->view('siswa/nilai', $data);
+        $this->load->view('templatesSiswa/footer_siswa');
     }
     public function chat()
     {

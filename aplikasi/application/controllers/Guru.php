@@ -252,8 +252,13 @@ class Guru extends CI_Controller
     }
     public function hapusParent($id_parent)
     {
-        $sql = "DELETE p.*, s.* FROM parent_soal p, soal_ulangan s WHERE p.id_parent=$id_parent AND s.parent_id = $id_parent";
+        $sql = "DELETE FROM parent_soal WHERE id_parent  = $id_parent";
         $this->db->query($sql, [$id_parent]);
+
+        $delete = "DELETE FROM soal_ulangan WHERE parent_id = $id_parent";
+        $this->db->query($delete, [$id_parent]);
+
+        $hapus = "DELETE FROM jawaban_soal WHERE id_parent_soal = $id_parent";
 
         $this->session->set_flashdata('flash', 'Data dihapus');
         $this->session->set_flashdata('flashtype', 'success');

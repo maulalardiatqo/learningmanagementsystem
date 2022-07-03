@@ -17,14 +17,14 @@
         $jumlah = $this->db->get()->row_array();
         ?>
         <?php
-        if ($jumlah['jumlah'] > 0 || $ul['tanggal_pengerjaan'] !== date('yyyy-mm-dd')) { ?>
+        if ((int)$jumlah['jumlah'] > 0 || $ul['tanggal_pengerjaan'] !== date('Y-m-d')) { ?>
             <div class="soal_ulangan">
                 <span style="color:blanchedalmond;"> <small><?= $no ?>. <?= $ul['type_ulangan'] ?> <?= $ul['judul_ulangan'] ?> <b>(<?= $ul['nama_mapel'] ?>)</b></small></span>
                 <?php $no++; ?>
             </div>
             <div class="waktu" style="color:aquamarine;">
                 <span style="color:azure;"><small>Status : </small></span>
-                <small><?php echo $ul['tanggal_pengerjaan'] !== date('yyyy-mm-dd') && $jumlah['jumlah'] > 0 ? "Sudah Di Kerjakan" : "Terlewat" ?></span></small>
+                <small><?php echo $ul['tanggal_pengerjaan'] !== date('yyyy-mm-dd') && $jumlah['jumlah'] > 0 ? "Sudah Di Kerjakan" : "Tanggal Pengerjaan Pada :" . $ul['tanggal_pengerjaan'] ?></span></small>
             </div>
         <?php  } else { ?>
             <div class="soal_ulangan">
