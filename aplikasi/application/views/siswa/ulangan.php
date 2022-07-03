@@ -10,12 +10,33 @@
 <div class="container">
     <?php $no = 1;
     foreach ($ulangan as $ul) : ?>
-        <div class="soal_ulangan">
-            <a href="<?= base_url() ?>/siswa/soal/<?= $ul['id_parent'] ?>" style="color:aquamarine;"> <small><?= $no ?>. <?= $ul['type_ulangan'] ?> <?= $ul['judul_ulangan'] ?> <b>(<?= $ul['nama_mapel'] ?>)</b></small></a>
-            <?php $no++; ?>
-        </div>
-        <div class="waktu" style="color:aquamarine;">
-            <small><?= $ul['tanggal_pengerjaan'] ?> <span style="color: red;"><?= $ul['waktu_pengerjaan'] ?> Menit</span></small>
-        </div>
+        <?php $this->db->select('count("id_jawaban") as jumlah');
+        $this->db->from('jawaban_soal');
+        $this->db->where('id_parent_soal', $ul['id_parent']);
+        $this->db->where('siswa_nama', $this->session->userdata('username'));
+        $jumlah = $this->db->get()->row_array();
+        ?>
+        <?php
+        if ($jumlah['jumlah'] > 0 || $ul['tanggal_pengerjaan'] !== date('yyyy-mm-dd')) { ?>
+            <div class="soal_ulangan">
+                <span style="color:blanchedalmond;"> <small><?= $no ?>. <?= $ul['type_ulangan'] ?> <?= $ul['judul_ulangan'] ?> <b>(<?= $ul['nama_mapel'] ?>)</b></small></span>
+                <?php $no++; ?>
+            </div>
+            <div class="waktu" style="color:aquamarine;">
+                <span style="color:azure;"><small>Status : </small></span>
+                <small><?php echo $ul['tanggal_pengerjaan'] !== date('yyyy-mm-dd') && $jumlah['jumlah'] > 0 ? "Sudah Di Kerjakan" : "Terlewat" ?></span></small>
+            </div>
+        <?php  } else { ?>
+            <div class="soal_ulangan">
+                <a href="<?= base_url() ?>/siswa/soal/<?= $ul['id_parent'] ?>" style="color:aquamarine;"> <small><?= $no ?>. <?= $ul['type_ulangan'] ?> <?= $ul['judul_ulangan'] ?> <b>(<?= $ul['nama_mapel'] ?>)</b></small></a>
+                <?php $no++; ?>
+            </div>
+            <div class="waktu" style="color:aquamarine;">
+                <span style="color:azure;"><small>Status : </small></span>
+                <small><?= $ul['tanggal_pengerjaan'] ?> <span style="color: red;"><?= $ul['waktu_pengerjaan'] ?> Menit</span></small>
+            </div>
+        <?php  }
+        ?>
+
     <?php endforeach ?>
 </div>

@@ -126,21 +126,60 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/ulangan', $data);
         $this->load->view('templatesSiswa/footer_siswa');
     }
-    public function soal()
+    public function soal($id_parent)
     {
         $data['judul'] = 'Ulangan';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
         $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
         $data['mapel'] = $this->db->get_where('mapel', ['kelas_mapel' => $data['siswa']['kelas']])->result_array();
+        $mapel_id = $data['mapel'][0]['id_mapel'];
         $this->db->select('*');
         $this->db->from('parent_soal');
         $this->db->join('mapel', 'mapel.id_mapel = parent_soal.mapel_id_parent');
         $this->db->where('mapel.kelas_mapel', $data['siswa']['kelas']);
         $data['ulangan'] = $this->db->get()->result_array();
 
+        $data['soal'] = $this->db->get_where('soal_ulangan', ['parent_id' => $id_parent])->result_array();
+        $data['parent'] = $this->db->get_where('parent_soal', ['id_parent' => $id_parent])->row_array();
+
         $this->load->view('templatesSiswa/topbar_siswa', $data);
         $this->load->view('siswa/soal', $data);
         $this->load->view('templatesSiswa/footer_siswa');
+    }
+    public function post_soal($id_parent)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
+        $data['mapel'] = $this->db->get_where('mapel', ['kelas_mapel' => $data['siswa']['kelas']])->result_array();
+        $mapel_id = $data['mapel'][0]['id_mapel'];
+        $this->db->select('id_soal');
+        $this->db->from('soal_ulangan');
+        $this->db->where('parent_id', $id_parent);
+        $data['id'] = $this->db->get()->result_array();
+        $jawaban = [];
+        foreach ($data['id'] as $d) {
+            $this->form_validation->set_rules('jawaban-' . $d['id_soal'], 'Jawaban', 'required');
+            array_push($jawaban, [
+                'id_parent_soal' => $id_parent,
+                'soal_id' => $d['id_soal'],
+                'jawaban' => $this->input->post('jawaban-' . $d['id_soal']),
+                'siswa_nama' => $this->session->userdata['username'],
+                'mapel_id' => $mapel_id
+            ]);
+        }
+        // var_dump($data['id']);
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('flash', 'Periksa Kembali!!!, Jawaban harus diisi');
+            $this->session->set_flashdata('flashtype', 'danger');
+            redirect('siswa/soal/' . $id_parent);
+        } else {
+
+            $this->db->insert_batch('jawaban_soal', $jawaban);
+            $this->session->set_flashdata('flash', 'Jawaban Terkirim');
+            $this->session->set_flashdata('flashtype', 'success');
+            redirect('siswa/ulangan');
+        }
     }
     public function chat()
     {
