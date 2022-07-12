@@ -10,6 +10,7 @@ class Siswa extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        cek_login('3');
         $this->load->library('form_validation');
     }
     public function index()
@@ -171,7 +172,7 @@ class Siswa extends CI_Controller
                 'soal_id' => $d['id_soal'],
                 'jawaban' => $this->input->post('jawaban-' . $d['id_soal']),
                 'siswa_nama' => $this->session->userdata['username'],
-                'mapel_id' => $mapel_id
+                'mapel_id' => $this->input->post('mapel_id_parent'),
             ]);
         }
         $nilai = 100 / $jumlah_soal * $jawaban_benar;
@@ -186,10 +187,13 @@ class Siswa extends CI_Controller
             $this->db->join('mapel', 'mapel.id_mapel = parent_soal.mapel_id_parent');
             $this->db->where('mapel.kelas_mapel', $data['siswa']['kelas']);
             $data['ulangan'] = $this->db->get()->result_array();
+            $data['siswa'] = $this->db->get_where('siswa', ['nis' => $this->session->userdata['username']])->row_array();
+            $kelas = $data['siswa']['kelas'];
             $this->db->insert('nilai', [
                 'nilai_judul_ulangan' => $data['ulangan'][0]['judul_ulangan'],
-                'mapel_nilai' => $data['ulangan'][0]['mapel_id_parent'],
+                'mapel_nilai' => $this->input->post('mapel_id_parent'),
                 'nilai_nama_siswa' => $this->session->userdata['username'],
+                'nilai_kelas_siswa' => $kelas,
                 'nilai' => $nilai
             ]);
             $this->db->insert_batch('jawaban_soal', $jawaban);

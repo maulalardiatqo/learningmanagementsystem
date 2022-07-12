@@ -11,6 +11,7 @@
     <?php foreach ($soal as $g) : ?>
         <form action="<?= base_url('siswa/post_soal/') . $g['parent_id'] ?>" method="POST">
         <?php endforeach ?>
+        <input type="hidden" name="mapel_id_parent" value="<?= $parent['mapel_id_parent'] ?>">
         <?php $no = 1;
         foreach ($soal as $s) : ?>
             <div class="soal">

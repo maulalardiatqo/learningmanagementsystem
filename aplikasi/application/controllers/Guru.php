@@ -10,6 +10,7 @@ class Guru extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        cek_login('2');
         $this->load->library('form_validation');
     }
     public function index()
@@ -264,12 +265,33 @@ class Guru extends CI_Controller
         $this->session->set_flashdata('flashtype', 'success');
         redirect('guru/ulangan');
     }
-    public function ujian()
+    public function nilai()
     {
         $data['judul'] = 'Guru';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $this->db->select('*');
+        $this->db->from('mapel');
+        $this->db->join('kelas', 'kelas.id_kelas = mapel.kelas_mapel');
+        $this->db->join('nilai', 'nilai.nilai_kelas_siswa = mapel.kelas_mapel');
+        $this->db->where('mapel.guru_mapel', $data['user']['username']);
+        $data['nilai'] = $this->db->get()->result_array();
         $this->load->view('templates/header_guru', $data);
-        $this->load->view('guru/ujian', $data);
+        $this->load->view('guru/nilai', $data);
+        $this->load->view('templates/footer_nav_guru');
+        $this->load->view('templates/footer_guru');
+    }
+    public function detailNilai($id_mapel)
+    {
+        $data['judul'] = 'Guru';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata['username']])->row_array();
+        $this->db->select('*');
+        $this->db->from('nilai');
+        $this->db->join('mapel', 'mapel.id_mapel = nilai.mapel_nilai');
+        $this->db->join('siswa', 'siswa.nis = nilai.nilai_nama_siswa');
+        $this->db->where('nilai.mapel_nilai', $id_mapel);
+        $data['nilai'] = $this->db->get()->result_array();
+        $this->load->view('templates/header_guru', $data);
+        $this->load->view('guru/detailNilai', $data);
         $this->load->view('templates/footer_nav_guru');
         $this->load->view('templates/footer_guru');
     }
